@@ -1,4 +1,4 @@
-import Vector from "../coretools/vector.js";
+import {Vector} from "./coretools.js";
 
 /**
 * The Sprite class represents a visual element that can be drawn onto the canvas.

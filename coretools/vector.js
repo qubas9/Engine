@@ -201,6 +201,19 @@ class Vector {
         }
         return vecA.x * vecB.x + vecA.y * vecB.y;
     }
+    /**
+     * @description Checks if two vectors are equal.
+     * @param {Vector} vecA - First vector.
+     * @param {Vector} vecB - Second vector.
+     * @returns {boolean} True if vectors are equal, false otherwise.
+     * @throws {Error} If inputs are not Vectors.
+     */
+    static equal(vecA, vecB) {
+        if (!(vecA instanceof Vector) || !(vecB instanceof Vector)) {
+            throw new Error("Arguments must be instances of Vector");
+        }
+        return vecA.x === vecB.x && vecA.y === vecB.y;
+    }
 }
 
 export default Vector;

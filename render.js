@@ -1,4 +1,4 @@
-import Sprite from "./spritebaseds/sprite.js"; // Ensure Sprite is imported
+import {Sprite} from "./engine.js"; // Ensure Sprite is imported
 
 /**
  * The Render class is responsible for handling the canvas rendering,

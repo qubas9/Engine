@@ -1,10 +1,11 @@
-import Vector from "./coretools/vector.js";
-import Hitbox from "./coretools/hitbox.js";
-import Block from "./spritebaseds/block.js";
+import {Vector} from "./coretools.js";
+import {Hitbox} from "./coretools.js";
+import {Block} from "./engine.js";
 class Physic {
     constructor(){
         this.blocks = [];
         this.entyties = [];
+        this.updatable = [];
     }
 
     update() {
@@ -16,6 +17,10 @@ class Physic {
                 }
             });
         });
+
+        this.updatable.forEach(updatable => {
+            updatable.update();
+        });
     }
 
     addBlock(block) {
@@ -23,6 +28,14 @@ class Physic {
             this.blocks.push(block);
         } else {
             console.error("Invalid block type. Expected an instance of Block.");
+        }
+    }
+
+    addUpdatable(updatable) {
+        if (updatable && typeof updatable.update === "function") {
+            this.updatable.push(updatable);
+        } else {
+            console.error("Invalid updatable object. It must have an update method.");
         }
     }
 }

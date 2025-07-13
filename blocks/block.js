@@ -1,6 +1,6 @@
-import Sprite from "./sprite.js"; // Ensure this matches the export in sprite.js
-import Hitbox from "../coretools/hitbox.js";
-import Vector from "../coretools/vector.js";
+import {Sprite} from "../engine.js"; // Ensure this matches the export in sprite.js
+import {Hitbox} from "../coretools.js";
+import {Vector} from "../coretools.js";
 
 class Block extends Sprite {
     /**

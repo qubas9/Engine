@@ -1,7 +1,8 @@
 node_modules
 tests
-testhtml
+testasets
 babel.config.js
 jest.setup.js
 package-lock.json
 package.json
+index.html

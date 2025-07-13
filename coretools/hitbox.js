@@ -1,4 +1,4 @@
-import Vector from "./vector.js";
+import {Vector} from "../coretools.js";
 /**
  * Hitbox class represents the rectangular boundary of an object.
  */
@@ -19,7 +19,7 @@ class Hitbox {
      * Updates the position of the hitbox.
      * @param {Vector} position - The new position of the object.
      */
-    update(position) {
+    updatePosition(position) {
         this.position = position.copy();
     }
 
