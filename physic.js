@@ -12,9 +12,7 @@ class Physic {
         this.entyties.forEach(entity => {
             entity.update(deltaTime);
             this.blocks.forEach(block => {
-                if (entity.hitbox.collidesWith(block.hitbox)) {
-                    entity.onCollision(block);
-                }
+                entity.checkColision(block)
             });
         });
 
@@ -36,6 +34,14 @@ class Physic {
             this.updatable.push(updatable);
         } else {
             console.error("Invalid updatable object. It must have an update method.");
+        }
+    }
+
+    addEntity(entity) {
+        if (entity && typeof entity.update === "function") {
+            this.entyties.push(entity);
+        } else {
+            console.error("Invalid entity object. It must have an update method.");
         }
     }
 }

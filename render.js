@@ -62,6 +62,11 @@ class Render {
           if (sprite.loaded && sprite.image) { // Ensure the image is valid and loaded
               this.ctx.drawImage(sprite.image, sprite.position.x, sprite.position.y, sprite.width, sprite.height);
                         }
+            if (sprite.hitbox) {
+                // Draw the hitbox for debugging purposes
+                this.ctx.strokeStyle = "red"; // Set hitbox color to red
+                this.ctx.strokeRect(sprite.hitbox.position.x + sprite.hitbox.offset1.x , sprite.hitbox.position.y +sprite.hitbox.offset1.y,sprite.hitbox.offset2.x,sprite.hitbox.offset2.y);
+            }
       }
         // Execute the callback function if provided
         if (typeof callback === "function") {
