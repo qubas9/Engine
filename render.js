@@ -11,11 +11,12 @@ class Render {
    * @param {number} height - The height of the canvas.
    * @param {Array} background - The background color of the canvas (RGB array). Default is light gray.
    */
-  constructor(width, height, background = [250, 250, 250]) {
+  constructor(width, height, scale, background = [250, 250, 250]) {
       this.canvas = document.createElement("canvas");
       this.canvas.width = width;
       this.canvas.height = height;
-      this.ctx = this.canvas.getContext("2d");
+      this.ctx = this.canvas.getContext("2d"); // Set the scale for the context
+      this.ctx.scale(scale, scale); // Apply scaling to the context
       this.sprites = []; // List of all sprites to render
       this.background = background; // Background color
       document.body.appendChild(this.canvas);
@@ -40,11 +41,10 @@ class Render {
    * @param {string} imageSrc - The URL of the image for the sprite.
    * @param {number} width - The width of the sprite.
    * @param {number} height - The height of the sprite.
-   * @param {number} scale - The scaling factor for the sprite (default is 1).
    * @returns {Sprite} A new instance of the Sprite class.
    */
-  makeSprite(x, y, imageSrc, width, height, scale = 1) {
-      return new Sprite(x, y, imageSrc, width, height, scale);
+  makeSprite(x, y, imageSrc, width, height) {
+      return new Sprite(x, y, imageSrc, width, height);
   }
 
   /**
@@ -65,6 +65,7 @@ class Render {
             if (sprite.hitbox) {
                 // Draw the hitbox for debugging purposes
                 this.ctx.strokeStyle = "red"; // Set hitbox color to red
+                this.ctx.lineWidth = 0.1; // Set hitbox line width
                 this.ctx.strokeRect(sprite.hitbox.position.x + sprite.hitbox.offset1.x , sprite.hitbox.position.y +sprite.hitbox.offset1.y,sprite.hitbox.offset2.x,sprite.hitbox.offset2.y);
             }
       }

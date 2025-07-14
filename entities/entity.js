@@ -12,12 +12,11 @@ class Entity extends Sprite {
      * @param {number} height - The height of the entity.
      * @param {Physic} physic - An instance of the Physic class to which this entity will be added.
      * @param {Vector} gravity - The gravity affecting the entity (default is (0,5)).
-     * @param {number} scale - The scaling factor for the entity (default is 1).)
      * @param {Render} render - An instance of the Render class to which this entity will be added.
      * @param {Function} onloadCallback - A callback function that is called when the
      */
-    constructor(x, y, imageSrc, width, height, scale = 1,render,physic,gravity = new Vector(0,5), onloadCallback) {
-        super(x, y, imageSrc, width, height, scale,render,onloadCallback);
+    constructor(x, y, imageSrc, width, height,render,physic,gravity = new Vector(0,5), onloadCallback) {
+        super(x, y, imageSrc, width, height, render,onloadCallback);
         this.hitbox = new Hitbox(new Vector(0, 0), new Vector(width, height), this.position);
         this.groundSensors = [new Hitbox(new Vector(0,this.height+1),new Vector(0,this.height+1),this.position),new Hitbox(new Vector(this.width,this.height+1),new Vector(this.width,this.height+1),this.position)]; // Array to hold ground sensors
         this.onGround = false; // Flag to indicate if the entity is on the ground

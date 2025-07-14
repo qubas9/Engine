@@ -12,12 +12,11 @@ class MovingBlock extends Block {
      * @param {string} imageSrc - The URL of the image for the block.
      * @param {number} width - The width of the block.
      * @param {number} height - The height of the block.
-     * @param {number} scale - The scaling factor for the block (default is 1).
      * @param {Render} render - An instance of the Render class to which this block will be added.
      * @param {Function} onLoadCallback - A callback function that is called when the image is loaded (optional).
      */
-    constructor(startx, starty,endx,endy,routeTime, imageSrc, width, height, scale = 1, render, physic, onLoadCallback) {
-        super(startx, starty, imageSrc, width, height, scale, render, physic, onLoadCallback);
+    constructor(startx, starty,endx,endy,routeTime, imageSrc, width, height, render, physic, onLoadCallback) {
+        super(startx, starty, imageSrc, width, height, render, physic, onLoadCallback);
         physic.addUpdatable(this); // Assuming physic is an instance of a class that manages updatable objects
         this.speed = new Vector((endx - startx) / routeTime, (endy - starty) / routeTime);  
         this.start = this.position.copy(); // Store the starting position 

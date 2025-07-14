@@ -2,7 +2,7 @@ import {Vector} from "./coretools.js";
 
 /**
 * The Sprite class represents a visual element that can be drawn onto the canvas.
-* Each sprite has its own position, image, and scale.
+* Each sprite has its own position and image.
 */
 class Sprite {
     /**
@@ -12,12 +12,11 @@ class Sprite {
      * @param {string} imageSrc - The URL of the image for the sprite.
      * @param {number} width - The width of the sprite.
      * @param {number} height - The height of the sprite.
-     * @param {number} scale - The scaling factor for the sprite (default is 1).
      * @param {Render} Render - An instance of the Render class to which this sprite will be added.
      * @param {Function} onLoadCallback - A callback function that is called when the image is loaded (optional).
      * @throws {Error} If any of the parameters are of incorrect types.
      */
-    constructor(x, y, imageSrc, width, height, scale = 1, render, onLoadCallback) {
+    constructor(x, y, imageSrc, width, height, render, onLoadCallback) {
         if (typeof x !== "number" || typeof y !== "number") {
             throw new Error("x and y must be numbers");
         }
@@ -29,9 +28,8 @@ class Sprite {
         }
   
         this.position = new Vector(x, y); // The position of the sprite as a Vector
-        this.scale = scale; // The scaling factor
-        this.width = width * this.scale; // The width of the sprite, adjusted by scale
-        this.height = height * this.scale; // The height of the sprite, adjusted by scale
+        this.width = width ; // The width of the sprite, 
+        this.height = height ; // The height of the sprite,
         this.image = new Image(); // Create a new image element
         this.loaded = false; // Flag to indicate if the image is loaded
   
