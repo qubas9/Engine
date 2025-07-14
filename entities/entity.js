@@ -52,12 +52,44 @@ class Entity extends Sprite {
             return true; // Collision detected
         }
         if(this.onGround){
-
+            this.touching = []; // Reset touching array if on ground
             // Check if the entity is touching the ground sensors
-            this.onGround = this.groundSensors.some(sensor => sensor.isColliding(block.hitbox));
+            this.onGround = this.groundSensors.some(sensor => {
+                if (sensor.isColliding(block.hitbox)){
+                    this.touching.push(block);
+                    return true; // At least one sensor is colliding
+                }else{
+                    return false; // No collision with this sensor
+                }
+            },this);
             
         }
         return false; // No collision
+    }
+
+    onCollision(block) {
+        if (this.velocity.y > this.velocity.x){
+            if (this.velocity.y > 0) {
+                // Collision from above
+                this.position.y = block.hitbox.position.y - this.height;
+                block.onCollision(this, new Vector(0,1)); // Notify the block of the collision
+                this.onGround = true; // Set onGround to true
+            }else {
+                // Collision from below
+                this.position.y = block.hitbox.position.y + block.hitbox.offset2.y;
+                block.onCollision(this,new Vector(0,-1)); // Notify the block of the collision
+            }
+        }else {
+            if (this.velocity.x > 0) {
+                // Collision from the left
+                this.position.x = block.hitbox.position.x - this.width;
+                block.onCollision(this, new Vector(1,0)); // Notify the block of the collision
+            } else {
+                // Collision from the right
+                this.position.x = block.hitbox.position.x + block.hitbox.offset2.x;
+                block.onCollision(this, new Vector(-1,0)); // Notify the block of the collision
+            }
+        }
     }
 }
 

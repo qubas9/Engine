@@ -71,6 +71,15 @@ class Vector {
         return this;
     }
 
+    multTogether(vector) {
+        if (!(vector instanceof Vector)) {
+            throw new Error("Argument must be a Vector");
+        }
+        this.x *= vector.x;
+        this.y *= vector.y;
+        return this;
+    }
+
     /**
      * @description Divides the vector by a scalar.
      * @param {number} scalar - The scalar to divide by.
@@ -166,6 +175,13 @@ class Vector {
             throw new Error("Scalar must be a number");
         }
         return new Vector(vecA.x * scalar, vecA.y * scalar);
+    }
+
+    static multTogether(vecA, vecB) {
+        if (!(vecA instanceof Vector) || !(vecB instanceof Vector)) {
+            throw new Error("Arguments must be instances of Vector");
+        }
+        return new Vector(vecA.x * vecB.x, vecA.y * vecB.y);
     }
 
     /**

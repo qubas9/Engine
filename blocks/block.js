@@ -22,6 +22,14 @@ class Block extends Sprite {
             console.log("physic is not defined or does not have an addBlock method.");
         }
     }
+    /**
+     * @description Aplly block specific behavior to entity.
+     * @param {Entity} entity - The entity the behavior is apllyed.
+     * @param {Vector} direction - The direction of the collision (optional).
+     */ 
+    onCollision(entity,direction) {
+        entity.velocity.multTogether(direction.mult(-0.5)); // Reset entity's velocity on collision
+    }
 }
 
 export default Block; // Ensure Block is exported as default
