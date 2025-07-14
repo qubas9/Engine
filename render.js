@@ -50,8 +50,9 @@ class Render {
   /**
    * Renders the canvas, including the background and all sprites.
    * This method is called to update the canvas every frame.
+   * @param {Function} callback - A callback function that can be executed after rendering (optional).
    */
-  render() {
+  render(callback) {
       // Fill the canvas with the background color
       this.ctx.fillStyle = `rgb(${this.background[0]},${this.background[1]},${this.background[2]})`;
       this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
@@ -62,6 +63,10 @@ class Render {
               this.ctx.drawImage(sprite.image, sprite.position.x, sprite.position.y, sprite.width, sprite.height);
                         }
       }
+        // Execute the callback function if provided
+        if (typeof callback === "function") {
+            callback();
+        }
   }
 }
 

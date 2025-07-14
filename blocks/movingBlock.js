@@ -8,7 +8,7 @@ class MovingBlock extends Block {
      * @param {number} starty - The start y-coordinate of the block`s path.
      * @param {number} endx - The end x-coordinate of the block`s path.
      * @param {number} endy - The end y-coordinate of the block`s path
-     * @param {number} routeTime - The time it takes to move from start to end (in frames).
+     * @param {number} routeTime - The time it takes to move from start to end (in seconds).
      * @param {string} imageSrc - The URL of the image for the block.
      * @param {number} width - The width of the block.
      * @param {number} height - The height of the block.
@@ -24,12 +24,12 @@ class MovingBlock extends Block {
         this.end = new Vector(endx, endy); // Store the end position
     }
 
-    update() {
-        this.position.add(this.speed);
+    update(deltaTime) {
+        this.position.add(Vector.mult(this.speed,deltaTime));
         this.hitbox.updatePosition(this.position);
         
         // Check if the block has reached the end of its path
-        if (Vector.sub(this.position, this.end).mag < this.speed.mag || Vector.sub(this.position, this.start).mag < this.speed.mag) {
+        if (Vector.sub(this.position, this.end).mag < Vector.mult(this.speed,deltaTime).mag || Vector.sub(this.position, this.start).mag < Vector.mult(this.speed,deltaTime).mag) {
             // Reverse the speed to move back to the start
             
             this.speed.mult(-1);

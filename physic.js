@@ -8,9 +8,9 @@ class Physic {
         this.updatable = [];
     }
 
-    update() {
+    update(deltaTime) {
         this.entyties.forEach(entity => {
-            entity.update();
+            entity.update(deltaTime);
             this.blocks.forEach(block => {
                 if (entity.hitbox.collidesWith(block.hitbox)) {
                     entity.onCollision(block);
@@ -19,7 +19,7 @@ class Physic {
         });
 
         this.updatable.forEach(updatable => {
-            updatable.update();
+            updatable.update(deltaTime);
         });
     }
 
