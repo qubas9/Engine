@@ -69,8 +69,15 @@ class Entity extends Sprite {
     }
 
     onCollision(block) {
-        if (this.velocity.y > this.velocity.x){
-            if (this.velocity.y > 0) {
+        let velocity;
+        if (block.velocity != undefined){
+            velocity = Vector.add(this.velocity,Vector.mult(block.velocity,-1)); // Calculate the velocity including gravity
+        }else{
+            velocity = this.velocity; // Use the entity's velocity if block has no velocity
+        }
+        console.log("v"+velocity.x+" "+velocity.y);
+        if (Math.abs(velocity.y) > Math.abs(velocity.x)){
+            if (velocity.y > 0) {
                 // Collision from above
                 this.position.y = block.hitbox.position.y - this.height-1;
                 block.onCollision(this, new Vector(0,1)); // Notify the block of the collision
@@ -82,11 +89,13 @@ class Entity extends Sprite {
                 block.onCollision(this,new Vector(0,-1)); // Notify the block of the collision
             }
         }else {
-            if (this.velocity.x > 0) {
+            if (velocity.x > 0) {
                 // Collision from the left
+                console.log("Collision from the left");
                 this.position.x = block.hitbox.position.x - this.width-1;
                 block.onCollision(this, new Vector(1,0)); // Notify the block of the collision
             } else {
+                console.log("Collision from the right");
                 // Collision from the right
                 this.position.x = block.hitbox.position.x + block.hitbox.offset2.x+1;
                 block.onCollision(this, new Vector(-1,0)); // Notify the block of the collision

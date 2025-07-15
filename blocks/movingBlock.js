@@ -18,7 +18,7 @@ class MovingBlock extends Block {
     constructor(startx, starty,endx,endy,routeTime, imageSrc, width, height, render, physic, onLoadCallback) {
         super(startx, starty, imageSrc, width, height, render, physic, onLoadCallback);
         physic.addUpdatable(this); // Assuming physic is an instance of a class that manages updatable objects
-        this.speed = new Vector((endx - startx) / routeTime, (endy - starty) / routeTime);  
+        this.velocity = new Vector((endx - startx) / routeTime, (endy - starty) / routeTime);  
         this.start = this.position.copy(); // Store the starting position 
         this.end = new Vector(endx, endy); // Store the end position
         this.deltaTime = 0;
@@ -26,26 +26,26 @@ class MovingBlock extends Block {
 
     update(deltaTime) {
         this.deltaTime = deltaTime; // Store the delta time for use in other methods
-        this.position.add(Vector.mult(this.speed,deltaTime));
+        this.position.add(Vector.mult(this.velocity,deltaTime));
         this.hitbox.updatePosition(this.position);
         
         // Check if the block has reached the end of its path
-        if (Vector.sub(this.position, this.end).mag < Vector.mult(this.speed,deltaTime).mag || Vector.sub(this.position, this.start).mag < Vector.mult(this.speed,deltaTime).mag) {
-            // Reverse the speed to move back to the start
+        if (Vector.sub(this.position, this.end).mag < Vector.mult(this.velocity,deltaTime).mag || Vector.sub(this.position, this.start).mag < Vector.mult(this.velocity,deltaTime).mag) {
+            // Reverse the velocity to move back to the start
             
-            this.speed.mult(-1);
+            this.velocity.mult(-1);
         }
     }
 
     touching(entity) {
-        entity.position.add(Vector.mult(this.speed,this.deltaTime));
+        entity.position.add(Vector.mult(this.velocity,this.deltaTime));
         
     }
 
     onCollision(entity, direction) {
         super.onCollision(entity, direction); // Call the parent class's onCollision method
         this.touching(entity);
-        this.touching(entity); // Call the touching method to apply the block's specific behavior
+        // this.touching(entity); // Call the touching method to apply the block's specific behavior
     }
 }
 
