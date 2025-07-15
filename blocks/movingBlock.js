@@ -42,19 +42,19 @@ class MovingBlock extends Block {
 
     touching(entity) {
         let velocity = Vector.sub(entity.velocity,this.velocity);
-        velocity.mult(-this.friction); // Call the parent class's touching method
-        // entity.position.add(Vector.mult(this.velocity,this.deltaTime));
-        if (this.justTurned) {
-            // Add the block's velocity to the entity's velocity
-        }
+        velocity.mult(this.friction); // Apply friction to the entity's velocity
         entity.velocity=Vector.add(this.velocity,velocity); // Update the entity's velocity with the modified velocity
     }
 
     onCollision(entity, direction) {
         super.onCollision(entity, direction.copy()); // Call the parent class's onCollision method
        // super.onCollision(entity, direction); // Call the parent class's onCollision method
+       
        // Add the block's velocity to the entity's velocityentity.position.add(Vector.mult(this.velocity,this.deltaTime));
-       entity.velocity.add(this.velocity); // Add the block's velocity to the entity's velocity
+       if (entity.velocity.mag+this.exeptedError < this.velocity.mag ) {
+
+           entity.velocity.add(this.velocity); // Add the block's velocity to the entity's velocity
+       }
         // Call the touching method to apply the block's specific behavior
         // this.touching(entity);
         // console.log("touching");

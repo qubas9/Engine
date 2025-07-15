@@ -15,7 +15,7 @@
 
         let render = new Render(2000,2000,4);
         let physic = new Physic();
-        let gameLoop = new GameLoop(physic, render, 220);
+        let gameLoop = new GameLoop(physic, render, 60);
         for (let i = 0; i < 100; i++) {
             let block = new Block(i * 20, 400 + (i % 2) * 20, "./testasets/Slimer.png", 16, 16, render, physic);
             console.log(block);
@@ -36,7 +36,7 @@
         console.log(block);
         console.log(physic);
 
-       let move = new MovingBlock(10, 390, 200, 390, 10, "./testasets/Slimer.png", 16, 16, render, physic,1, gameLoop.start.bind(gameLoop));
+       let move = new MovingBlock(10, 390, 200, 390, 10, "./testasets/Slimer.png", 16, 16, render, physic,0.99, gameLoop.start.bind(gameLoop));
         console.log(move);
 
 
