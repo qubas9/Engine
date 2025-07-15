@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Type3Games Testing Environment</title>
+</head>
+<body>
+    <h1>Type3Games Testing Environment</h1>
+    <script type="module" src="./engine.js"></script>
+    <script type="module" src="./coretools.js"></script>
+    <script type="module" id="main">
+        import { GameLoop, Render, Sprite,  Block,  Physic, MovingBlock,Entity,Player } from './engine.js';
+        import { Vector } from './coretools.js';
+
+        let render = new Render(2000,2000,4);
+        let physic = new Physic();
+        let gameLoop = new GameLoop(physic, render, 220);
+        for (let i = 0; i < 100; i++) {
+            let block = new Block(i * 20, 400 + (i % 2) * 20, "./testasets/Slimer.png", 16, 16, render, physic);
+            console.log(block);
+        }
+        // for (let i = 0; i < 500; i+=10) {
+        //     for (let j = 0; j < 500; j+=10) {
+        //         let block = new MovingBlock(0,0,i,j,i+1/100000, "./testasets/Slimer.png", 16, 16, render, physic);
+
+        //         console.log(block);
+        // }
+        // }
+       let player = new Player(100, 100, "./testasets/Slimer.png", 16, 16, render, physic);
+        let sprit = new Sprite(400,400,"./testasets/Slimer.png",16,16,render);
+        // let entity = new Entity(100,100,"./testasets/Slimer.png",16,16, render, physic, new Vector(0,500));
+        let block = new Block(100,400,"./testasets/Slimer.png",16,16,render,physic);
+        console.log(render);
+        console.log(sprit);
+        console.log(block);
+        console.log(physic);
+
+       let move = new MovingBlock(10, 390, 200, 390, 10, "./testasets/Slimer.png", 16, 16, render, physic, gameLoop.start.bind(gameLoop));
+        console.log(move);
+
+
+        // Start the game loop
+
+        // Start the game loop
+        
+        // setTimeout(() => {
+        //     gameLoop.stop.bind(gameLoop)
+        //     gameLoop.step.bind(gameLoop,1000)
+        // }, 10000); // Stop after 10 seconds)
+    </script>
+</body>
+</html>
