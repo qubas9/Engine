@@ -28,8 +28,13 @@ class Block extends Sprite {
      * @param {Vector} direction - The direction of the collision (optional).
      */ 
     onCollision(entity,direction) {
-        entity.velocity.multTogether(direction.mult(-0.5)); // Reset entity's velocity on collision
+        entity.velocity = new Vector(0,0); // Reset entity's velocity on collision
     }
+    /**
+     * Updates the block's position and hitbox.
+     * @param {number} deltaTime - The time elapsed since the last update (in seconds).
+     */
+    touching(entity) {}
 }
 
 export default Block; // Ensure Block is exported as default

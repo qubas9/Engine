@@ -21,9 +21,11 @@ class MovingBlock extends Block {
         this.speed = new Vector((endx - startx) / routeTime, (endy - starty) / routeTime);  
         this.start = this.position.copy(); // Store the starting position 
         this.end = new Vector(endx, endy); // Store the end position
+        this.deltaTime = 0;
     }
 
     update(deltaTime) {
+        this.deltaTime = deltaTime; // Store the delta time for use in other methods
         this.position.add(Vector.mult(this.speed,deltaTime));
         this.hitbox.updatePosition(this.position);
         
@@ -33,6 +35,17 @@ class MovingBlock extends Block {
             
             this.speed.mult(-1);
         }
+    }
+
+    touching(entity) {
+        entity.position.add(Vector.mult(this.speed,this.deltaTime));
+        
+    }
+
+    onCollision(entity, direction) {
+        super.onCollision(entity, direction); // Call the parent class's onCollision method
+        this.touching(entity);
+        this.touching(entity); // Call the touching method to apply the block's specific behavior
     }
 }
 

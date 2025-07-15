@@ -9,16 +9,18 @@ class Physic {
     }
 
     update(deltaTime) {
+        this.updatable.forEach(updatable => {
+            updatable.update(deltaTime);
+        });
+
         this.entyties.forEach(entity => {
             entity.update(deltaTime);
             this.blocks.forEach(block => {
                 entity.checkColision(block)
             });
+            entity.afterUpdate(deltaTime); // Call afterUpdate if it exists
         });
 
-        this.updatable.forEach(updatable => {
-            updatable.update(deltaTime);
-        });
     }
 
     addBlock(block) {
