@@ -43,8 +43,12 @@ class MovingBlock extends Block {
     }
 
     onCollision(entity, direction) {
-        super.onCollision(entity, direction); // Call the parent class's onCollision method
-        this.touching(entity);
+       // super.onCollision(entity, direction); // Call the parent class's onCollision method
+       this.touching(entity);
+        if (direction.x != 0) {
+            // If a direction is provided, apply the block's specific behavior
+            entity.velocity.x = this.velocity.x; // Reset entity's velocity on collision
+        }
         // this.touching(entity); // Call the touching method to apply the block's specific behavior
     }
 }

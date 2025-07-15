@@ -28,7 +28,10 @@ class Block extends Sprite {
      * @param {Vector} direction - The direction of the collision (optional).
      */ 
     onCollision(entity,direction) {
-        entity.velocity = new Vector(0,0); // Reset entity's velocity on collision
+        let bufer = Math.abs(direction.y)
+        direction.y = Math.abs(direction.x)
+        direction.x = bufer; // Swap x and y to ensure correct direction handling
+        entity.velocity.multTogether(direction); // Reset entity's velocity on collision
     }
     /**
      * Updates the block's position and hitbox.

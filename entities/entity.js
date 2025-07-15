@@ -79,12 +79,14 @@ class Entity extends Sprite {
         if (Math.abs(velocity.y) > Math.abs(velocity.x)){
             if (velocity.y > 0) {
                 // Collision from above
+                console.log("Collision from above");
                 this.position.y = block.hitbox.position.y - this.height-1;
                 block.onCollision(this, new Vector(0,1)); // Notify the block of the collision
                 this.onGround = true; // Set onGround to true
                 this.pasibleOnGround.push(true); // Add to pasibleOnGround array
             }else {
                 // Collision from below
+                console.log("Collision from below");
                 this.position.y = block.hitbox.position.y + block.hitbox.offset2.y+1;
                 block.onCollision(this,new Vector(0,-1)); // Notify the block of the collision
             }
