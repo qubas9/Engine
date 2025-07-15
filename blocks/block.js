@@ -13,8 +13,9 @@ class Block extends Sprite {
      * @param {Render} Render - An instance of the Render class to which this block will be added.
      * @param {Function} onLoadCallback - A callback function that is called when the image is loaded (optional).
      */
-    constructor(x, y, imageSrc, width, height, render,physic, onLoadCallback) {
+    constructor(x, y, imageSrc, width, height, render,physic,friction = 0.99, onLoadCallback) {
         super(x, y, imageSrc, width, height, render, onLoadCallback);
+        this.friction = friction ; // Default friction if not provided
         this.hitbox = new Hitbox(new Vector(0, 0), new Vector(width, height), this.position);
         if (physic && typeof physic.addBlock === 'function') {
             physic.addBlock(this); // Assuming physic is an instance of a class that manages physics
@@ -30,14 +31,24 @@ class Block extends Sprite {
     onCollision(entity,direction) {
         let bufer = Math.abs(direction.y)
         direction.y = Math.abs(direction.x)
-        direction.x = bufer; // Swap x and y to ensure correct direction handling
-        entity.velocity.multTogether(direction); // Reset entity's velocity on collision
+        direction.x = bufer//wap x and y to ensure correct direction handling
+        console.log("v"+entity.velocity.mag+" "+entity.velocity.x+" "+entity.velocity.y);
+        // if (entity.velocity.mag < 0.01){
+        //     entity.velocity = new Vector(0,0); // Reset entity's velocity on collision
+        // }else{
+
+            entity.velocity.multTogether(direction); // Reset entity's velocity on collision
+        // }
+        console.log("v"+entity.velocity.x+" "+entity.velocity.y);
+        
     }
     /**
      * Updates the block's position and hitbox.
      * @param {number} deltaTime - The time elapsed since the last update (in seconds).
      */
-    touching(entity) {}
+    touching(entity) {
+        entity.velocity.mult(this.friction) // Call the onCollision method to apply the block's specific behavior
+    }
 }
 
 export default Block; // Ensure Block is exported as default

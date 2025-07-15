@@ -3,7 +3,7 @@ import {Control} from "../coretools.js"; // Ensure this matches the export in co
 import {Vector} from "../coretools.js"; // Ensure this matches the export in vector.js
 
 class Player extends Entity {
-    constructor(x, y, imageSrc, width, height,render,physic,gravity = new Vector(0,5),onClickAcceleration = 10,jumpAcceleration = 50,callBacjMap = null, onloadCallback) {
+    constructor(x, y, imageSrc, width, height,render,physic,gravity = new Vector(0,5),onClickAcceleration = 50,jumpAcceleration = 50,callBacjMap = null, onloadCallback) {
         super(x, y, imageSrc, width, height,render,physic,gravity = new Vector(0,50), onloadCallback);
         this.controls = new Control(this, callBacjMap); // Initialize controls for the player
         this.onClickAcceleration = onClickAcceleration
