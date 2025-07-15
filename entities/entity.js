@@ -15,12 +15,13 @@ class Entity extends Sprite {
      * @param {Render} render - An instance of the Render class to which this entity will be added.
      * @param {Function} onloadCallback - A callback function that is called when the
      */
-    constructor(x, y, imageSrc, width, height,render,physic,gravity = new Vector(0,5), onloadCallback) {
+    constructor(x, y, imageSrc, width, height,render,physic,gravity = new Vector(0,500), onloadCallback) {
         super(x, y, imageSrc, width, height, render,onloadCallback);
         this.hitbox = new Hitbox(new Vector(0, 0), new Vector(width, height), this.position);
         this.groundSensor = new Hitbox(new Vector(0,this.height+1),new Vector(this.width,this.height+2),this.position); // Array to hold ground sensors
         this.onGround = false; // Flag to indicate if the entity is on the ground
         this.velocity = new Vector(0, 0); // Velocity vector for the entity
+        this.aceleration = new Vector(0, 0); // Acceleration vector for the entity
         this.gravity = gravity; // Default gravity if not provided
         this.touching = []; //
         this.pasibleOnGround = []; // Flag to indicate if the entity is pasible on ground
@@ -39,6 +40,7 @@ class Entity extends Sprite {
         }
         
         // Update the entity's position based on its velocity
+        this.velocity.add(Vector.mult(this.aceleration, deltaTime))
         this.position.add(Vector.mult(this.velocity, deltaTime));
         
         // Update the hitbox position
@@ -47,11 +49,19 @@ class Entity extends Sprite {
         this.onGround = this.pasibleOnGround.some((a) => a);
         
         this.pasibleOnGround = [] // Reset onGround flag at the start of each update
-        
+       this.aceleration = new Vector(0, 0); // Reset acceleration after applying it
     }
 
     afterUpdate(deltaTime) {
         
+    }
+
+    addVelocity(velocity) {
+        this.velocity.add(velocity); // Add the given velocity to the entity's velocity
+    }
+
+    addAcceleration(acceleration) {
+        this.aceleration.add(acceleration); // Add the given acceleration to the entity's acceleration
     }
 
     checkColision(block) {

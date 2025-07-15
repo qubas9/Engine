@@ -5,6 +5,7 @@ import GameLoop from './gameloop.js';
 import Block from './blocks/block.js';
 import MovingBlock from './blocks/movingBlock.js';
 import Entity from './entities/entity.js'; 
+import Player from './entities/player.js';
 
 /**
  * @typedef {import('./render.js').default} Render
@@ -14,10 +15,12 @@ import Entity from './entities/entity.js';
  * @typedef {import('./blocks/block.js').default} Block
  * @typedef {import('./blocks/movingBlock.js').default} MovingBlock
  * @typedef {import('./entities/entity.js').default} Entity
+ * @typedef {import('./entities/player.js').default} Player
  */
 
 
 export {
+  Player, 
   Entity,
   GameLoop,
   Sprite,

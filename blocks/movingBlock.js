@@ -21,16 +21,18 @@ class MovingBlock extends Block {
         this.velocity = new Vector((endx - startx) / routeTime, (endy - starty) / routeTime);  
         this.start = this.position.copy(); // Store the starting position 
         this.end = new Vector(endx, endy); // Store the end position
+        this.exeptedError = 0.00000000000000000000001; // Allowable error for reaching the end
         this.deltaTime = 0;
     }
 
     update(deltaTime) {
         this.deltaTime = deltaTime; // Store the delta time for use in other methods
+        this.exeptedError = this.deltaTime / 1000
         this.position.add(Vector.mult(this.velocity,deltaTime));
         this.hitbox.updatePosition(this.position);
         
         // Check if the block has reached the end of its path
-        if (Vector.sub(this.position, this.end).mag < Vector.mult(this.velocity,deltaTime).mag || Vector.sub(this.position, this.start).mag < Vector.mult(this.velocity,deltaTime).mag) {
+        if (Vector.sub(this.position, this.end).mag + this.exeptedError< Vector.mult(this.velocity,deltaTime).mag || Vector.sub(this.position, this.start).mag + this.exeptedError < Vector.mult(this.velocity,deltaTime).mag) {
             // Reverse the velocity to move back to the start
             
             this.velocity.mult(-1);
