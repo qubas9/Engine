@@ -4,3 +4,4 @@ tests
 babel.config.js
 jest.setup.js
 
+eslint.config.js

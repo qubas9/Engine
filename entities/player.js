@@ -6,14 +6,14 @@ class Player extends Entity {
     constructor(x, y, imageSrc, width, height,render,physic,gravity = new Vector(0,5),onClickAcceleration = 50,jumpAcceleration = 50,callBacjMap = null, onloadCallback) {
         super(x, y, imageSrc, width, height,render,physic,gravity = new Vector(0,50), onloadCallback);
         this.controls = new Control(this, callBacjMap); // Initialize controls for the player
-        this.onClickAcceleration = onClickAcceleration
+        this.onClickAcceleration = onClickAcceleration;
         this.jumpAcceleration = jumpAcceleration; // Set the jump acceleration
         this.controls.bind("left","a" ,this.left);
         this.controls.bind("right","d" ,this.right);
         this.controls.bind("jump","w" ,this.jump);
         // this.controls.bind("down","ArrowDown" ,this.down);
         this.controls.bindOnce("start","s" ,this.controls.startRecording.bind(this.controls));
-        this.controls.bindOnce("stop","q" ,() => {console.log(JSON.stringify(this.controls.stopRecording()))});
+        this.controls.bindOnce("stop","q" ,() => {console.log(JSON.stringify(this.controls.stopRecording()));});
        // let recording = prompt("Enter recorded events JSON:")
         // if (recording != "") {
         //     this.controls.startPlayback(JSON.parse(recording));

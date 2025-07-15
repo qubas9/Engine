@@ -28,7 +28,7 @@ class MovingBlock extends Block {
     update(deltaTime) {
         this.justTurned = false; // Reset the justTurned flag at the start of each update
         this.deltaTime = deltaTime; // Store the delta time for use in other methods
-        this.exeptedError = this.deltaTime / 1000
+        this.exeptedError = this.deltaTime / 1000;
         this.position.add(Vector.mult(this.velocity,deltaTime));
         this.hitbox.updatePosition(this.position);
         
@@ -41,8 +41,8 @@ class MovingBlock extends Block {
     }
 
     touching(entity) {
-        let velocity = Vector.sub(entity.velocity,this.velocity)
-        velocity.mult(-this.friction) // Call the parent class's touching method
+        let velocity = Vector.sub(entity.velocity,this.velocity);
+        velocity.mult(-this.friction); // Call the parent class's touching method
         // entity.position.add(Vector.mult(this.velocity,this.deltaTime));
         if (this.justTurned) {
             // Add the block's velocity to the entity's velocity

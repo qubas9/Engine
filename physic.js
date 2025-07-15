@@ -16,7 +16,7 @@ class Physic {
         this.entyties.forEach(entity => {
             entity.update(deltaTime);
             this.blocks.forEach(block => {
-                entity.checkColision(block)
+                entity.checkColision(block);
             });
             entity.afterUpdate(deltaTime); // Call afterUpdate if it exists
         });

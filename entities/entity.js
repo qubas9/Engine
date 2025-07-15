@@ -40,7 +40,7 @@ class Entity extends Sprite {
         }
         
         // Update the entity's position based on its velocity
-        this.velocity.add(Vector.mult(this.aceleration, deltaTime))
+        this.velocity.add(Vector.mult(this.aceleration, deltaTime));
         this.position.add(Vector.mult(this.velocity, deltaTime));
         
         // Update the hitbox position
@@ -48,7 +48,7 @@ class Entity extends Sprite {
         this.groundSensor.updatePosition(this.position); // Update the ground sensor position
         this.onGround = this.pasibleOnGround.some((a) => a);
         
-        this.pasibleOnGround = [] // Reset onGround flag at the start of each update
+        this.pasibleOnGround = []; // Reset onGround flag at the start of each update
        this.aceleration = new Vector(0, 0); // Reset acceleration after applying it
     }
 

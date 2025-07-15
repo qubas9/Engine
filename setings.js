@@ -12,4 +12,4 @@ const SETINGS = {
         "backgroundColor": "#000000"
     },
     
-}
+};

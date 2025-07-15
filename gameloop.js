@@ -80,7 +80,7 @@ class GameLoop {
     }
 
     addFunction(fn) {
-        if (typeof fn === 'function') {
+        if (typeof fn === "function") {
             this.functions.push(fn);
         } else {
             console.error("Provided argument is not a function.");

@@ -40,8 +40,8 @@ class Control {
     }
 
     _setupEventListeners() {
-        window.addEventListener('keydown', (e) => this._handleKeyDown(e));
-        window.addEventListener('keyup', (e) => this._handleKeyUp(e));
+        window.addEventListener("keydown", (e) => this._handleKeyDown(e));
+        window.addEventListener("keyup", (e) => this._handleKeyUp(e));
     }
 
     _handleKeyDown(e) {
@@ -61,7 +61,7 @@ class Control {
 
         if (this.recording) {
             this.recordedEvents.push({
-                type: 'keydown',
+                type: "keydown",
                 key,
                 frame: this.playbackFrameCounter +1
             });
@@ -86,7 +86,7 @@ class Control {
 
         if (this.recording) {
             this.recordedEvents.push({
-                type: 'keyup',
+                type: "keyup",
                 key,
                 frame: this.playbackFrameCounter +1
             });
@@ -126,7 +126,7 @@ class Control {
                 const simulatedEvent = new KeyboardEvent(event.type, { key: event.key });
                 console.log(`Simulating ${event.type} for key: ${event.key} at frame ${event.frame}`);
                 
-                if (event.type === 'keydown') {
+                if (event.type === "keydown") {
                     this._handleKeyDown(simulatedEvent);
                 } else {
                     this._handleKeyUp(simulatedEvent);
@@ -170,28 +170,28 @@ class Control {
     bind(name, key, callback) {
         this.namedBindings.set(name, key);
         this.namedCallbacks.set(name, callback);
-        this.namedTypes.set(name, 'hold');
+        this.namedTypes.set(name, "hold");
         this.bindings.set(key, callback);
     }
 
     bindOnce(name, key, callback) {
         this.namedBindings.set(name, key);
         this.namedCallbacks.set(name, callback);
-        this.namedTypes.set(name, 'once');
+        this.namedTypes.set(name, "once");
         this.onceBindings.set(key, callback);
     }
 
     bindRelease(name, key, callback) {
         this.namedBindings.set(name, key);
         this.namedCallbacks.set(name, callback);
-        this.namedTypes.set(name, 'release');
+        this.namedTypes.set(name, "release");
         this.releaseBindings.set(key, callback);
     }
 
     bindReleaseOnce(name, key, callback) {
         this.namedBindings.set(name, key);
         this.namedCallbacks.set(name, callback);
-        this.namedTypes.set(name, 'releaseOnce');
+        this.namedTypes.set(name, "releaseOnce");
         this.releaseOnceBindings.set(key, callback);
     }
 
@@ -200,7 +200,7 @@ class Control {
 
         this.namedBindings.set(name, key);
         this.namedCallbacks.set(name, combinedCallback);
-        this.namedTypes.set(name, 'withReleaseTick');
+        this.namedTypes.set(name, "withReleaseTick");
 
         this.bindings.set(key, combinedCallback);
 
@@ -229,10 +229,10 @@ class Control {
         this.namedCallbacks.set(name, callback);
         this.namedTypes.set(name, type);
 
-        if (type === 'hold') this.bind(name, key, callback);
-        else if (type === 'once') this.bindOnce(name, key, callback);
-        else if (type === 'release') this.bindRelease(name, key, callback);
-        else if (type === 'releaseOnce') this.bindReleaseOnce(name, key, callback);
+        if (type === "hold") this.bind(name, key, callback);
+        else if (type === "once") this.bindOnce(name, key, callback);
+        else if (type === "release") this.bindRelease(name, key, callback);
+        else if (type === "releaseOnce") this.bindReleaseOnce(name, key, callback);
     }
 
     updateBinding(name, newCallback) {
@@ -241,10 +241,10 @@ class Control {
         if (!key || !type) return;
 
         this.namedCallbacks.set(name, newCallback);
-        if (type === 'hold') this.bindings.set(key, newCallback);
-        else if (type === 'once') this.onceBindings.set(key, newCallback);
-        else if (type === 'release') this.releaseBindings.set(key, newCallback);
-        else if (type === 'releaseOnce') this.releaseOnceBindings.set(key, newCallback);
+        if (type === "hold") this.bindings.set(key, newCallback);
+        else if (type === "once") this.onceBindings.set(key, newCallback);
+        else if (type === "release") this.releaseBindings.set(key, newCallback);
+        else if (type === "releaseOnce") this.releaseOnceBindings.set(key, newCallback);
     }
 
     updateBindingKey(name, newKey) {

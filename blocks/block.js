@@ -17,7 +17,7 @@ class Block extends Sprite {
         super(x, y, imageSrc, width, height, render, onLoadCallback);
         this.friction = friction ; // Default friction if not provided
         this.hitbox = new Hitbox(new Vector(0, 0), new Vector(width, height), this.position);
-        if (physic && typeof physic.addBlock === 'function') {
+        if (physic && typeof physic.addBlock === "function") {
             physic.addBlock(this); // Assuming physic is an instance of a class that manages physics
         }else {
             console.log("physic is not defined or does not have an addBlock method.");
@@ -29,9 +29,9 @@ class Block extends Sprite {
      * @param {Vector} direction - The direction of the collision (optional).
      */ 
     onCollision(entity,direction) {
-        let bufer = Math.abs(direction.y)
-        direction.y = Math.abs(direction.x)
-        direction.x = bufer//wap x and y to ensure correct direction handling
+        let bufer = Math.abs(direction.y);
+        direction.y = Math.abs(direction.x);
+        direction.x = bufer;//wap x and y to ensure correct direction handling
         console.log("v"+entity.velocity.mag+" "+entity.velocity.x+" "+entity.velocity.y);
         // if (entity.velocity.mag < 0.01){
         //     entity.velocity = new Vector(0,0); // Reset entity's velocity on collision
@@ -47,7 +47,7 @@ class Block extends Sprite {
      * @param {number} deltaTime - The time elapsed since the last update (in seconds).
      */
     touching(entity) {
-        entity.velocity.mult(this.friction) // Call the onCollision method to apply the block's specific behavior
+        entity.velocity.mult(this.friction); // Call the onCollision method to apply the block's specific behavior
     }
 }
 
