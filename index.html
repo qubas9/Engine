@@ -10,76 +10,96 @@
     <script type="module" src="./engine.js"></script>
     <script type="module" src="./coretools.js"></script>
     <script type="module" id="main">
-        import { GameLoop, Render, Sprite,  Block,  Physic, MovingBlock,Entity,Player } from './engine.js';
+        import { GameLoop, Render, Sprite,  Block,  Physic, MovingBlock,Entity,Player ,LevelLoader} from './engine.js';
         import { Vector } from './coretools.js';
 
-        
-            let render = new Render({width : 2000,height : 2000,scale : 2})
-            let physic = new Physic()
-            let gameLoop =  new GameLoop(physic, render, 60)
 
-            let player = new Player({
-                x: 100,
-                y: 150,
-                imageSrc: "./testasets/Slimer.png",
-                width: 32,
-                height: 32,
-                render: render,
-                physic: physic,
-                onLoadCallback: () => {
-                    gameLoop.start();
-                },
-                callBackMap: {
-                    left: () => player.left(),
-                    right: () => player.right(),
-                    jump: () => player.jump()
-                },
-                onClickAcceleration: 100,
-                jumpAcceleration: 50,
-                gravity: new Vector(0, 100),
-                inAirDrag: 1
-            });
-            console.log(player);
-            for (let i = 0; i < 100; i++) {
-                let block = new Block({
-                    x: i*32,
-                    y: 200,
-                    width: 32,
-                    height: 32,
-                    imageSrc: "./testasets/Slimer.png",
-                    render: render,
-                    physic: physic,
-                    friction: 0.9
-                });
-            }
-            for (let i = 0; i < 100; i++) {
-                let block = new Block({
-                    x: 0,
-                    y: i*32,
-                    width: 32,
-                    height: 32,
-                    imageSrc: "./testasets/Slimer.png",
-                    render: render,
-                    physic: physic
-                });
-            }
+            let level = new LevelLoader()
+            level.loadLevel({
+                setings:{
+                    grid:{size:32},
+                    p:{
+                        type:"player",
+                        setings: {
+                            imageSrc: "./testasets/Slimer.png",
+                            width: 32,
+                            height: 32,
+                            onClickAcceleration: 100,
+                            jumpAcceleration: 50,
+                            gravity: new Vector(0, 100),
+                            inAirDrag: 1
+                        }
+                    },
+                    b:{
+                        type:"block",
+                        setings:{
+                            width: 32,
+                            height: 32,
+                            imageSrc: "./testasets/Slimer.png",
+                            friction: 0.9
+                        }
+                    },
+                    render:{
+                        width : 2000,
+                        height : 2000,
+                        scale : 2
+                    },
 
-            for (let i = 0; i < 100; i++) {
-                let block = new Block({
-                    x: 400,
-                    y: i*32,
-                    width: 32,
-                    height: 32,
-                    imageSrc: "./testasets/Slimer.png",
-                    render: render,
-                    physic: physic
-                });
-            }
-            //lower celing
+                },
+                grid:[[   ,   ,"p","p",   ,   ,"p","p",   ,   ,"b"],
+                      ["p","p",   ,   ,"p","p",   ,   ,"p","p"],
+                      [,,,,,,,,,],
+                      [,,,,,,,,,],
+                      [,,,,,,,,,],
+                      [,,,,,,,,,],
+                      [,,,,,,,,"b",],
+                      [,,,,,,,"b",,],
+                      [,,,,,,"b",,,],
+                      ["b","b","b","b","b","b","b","b","b","b"]]
+            })
+
+            // let render = new Render({width : 2000,height : 2000,scale : 2})
+            // let physic = new Physic()
+            // let gameLoop =  new GameLoop(physic, render, 60)
+
+            // let player = new Player({
+            //     x: 100,
+            //     y: 150,
+            //     imageSrc: "./testasets/Slimer.png",
+            //     width: 32,
+            //     height: 32,
+            //     render: render,
+            //     physic: physic,
+            //     onLoadCallback: () => {
+            //         gameLoop.start();
+            //     },
+            //     callBackMap: {
+            //         left: () => player.left(),
+            //         right: () => player.right(),
+            //         jump: () => player.jump()
+            //     },
+            //     onClickAcceleration: 100,
+            //     jumpAcceleration: 50,
+            //     gravity: new Vector(0, 100),
+            //     inAirDrag: 1
+            // });
+            // console.log(player);
             // for (let i = 0; i < 100; i++) {
             //     let block = new Block({
             //         x: i*32,
-            //         y: 130,
+            //         y: 200,
+            //         width: 32,
+            //         height: 32,
+            //         imageSrc: "./testasets/Slimer.png",
+            //         render: render,
+            //         physic: physic,
+            //         friction: 0.9
+            //     });
+            // }
+            // for (let i = 0; i < 100; i++) {
+            //     let block = new Block({
+            //         x: 0,
+            //         y: i*32,
             //         width: 32,
             //         height: 32,
             //         imageSrc: "./testasets/Slimer.png",
@@ -88,33 +108,59 @@
             //     });
             // }
 
-            //higher celing
-            for (let i = 0; i < 100; i++) {
-                let block = new Block({
-                    x: i*32,
-                    y: 50,
-                    width: 32,
-                    height: 32,
-                    imageSrc: "./testasets/Slimer.png",
-                    render: render,
-                    physic: physic
-                });
-            }
-
-            // let movingBlock = new MovingBlock({
-            //     startx: 50,
-            //         starty: 50,
-            //     endx: 50,
-            //     endy: 200,
-            //     routeTime: 2,
+            // for (let i = 0; i < 100; i++) {
+            //     let block = new Block({
+            //         x: 400,
+            //         y: i*32,
             //         width: 32,
             //         height: 32,
             //         imageSrc: "./testasets/Slimer.png",
             //         render: render,
-            //         physic: physic,
-            //         friction: 0.9
+            //         physic: physic
+            //     });
+            // }
+            // //lower celing
+            // // for (let i = 0; i < 100; i++) {
+            // //     let block = new Block({
+            // //         x: i*32,
+            // //         y: 130,
+            // //         width: 32,
+            // //         height: 32,
+            // //         imageSrc: "./testasets/Slimer.png",
+            // //         render: render,
+            // //         physic: physic
+            // //     });
+            // // }
+
+            // //higher celing
+            // for (let i = 0; i < 100; i++) {
+            //     let block = new Block({
+            //         x: i*32,
+            //         y: 50,
+            //         width: 32,
+            //         height: 32,
+            //         imageSrc: "./testasets/Slimer.png",
+            //         render: render,
+            //         physic: physic
+            //     });
+            // }
+
+            // // let movingBlock = new MovingBlock({
+            // //     startx: 50,
+            // //         starty: 50,
+            // //     endx: 50,
+            // //     endy: 200,
+            // //     routeTime: 2,
+            // //         width: 32,
+            // //         height: 32,
+            // //         imageSrc: "./testasets/Slimer.png",
+            // //         render: render,
+            // //         physic: physic,
+            // //         friction: 0.9
                     
-            // })
+            // // })
+
+
     </script>
 </body>
 </html>      

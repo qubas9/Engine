@@ -1,10 +1,10 @@
 class GameLoop {
-    constructor(physic, render, fps = 20) {
+    constructor({physic, render, fps}) {
         this.functions = [];
         this.isRunning = false;
         this.physic = physic;
         this.render = render;
-        this.fps = fps;
+        this.fps = fps || 60;
         this.frameDuration = 1000 / this.fps; // ms mezi snímky
         this.lastTime = 0;
         this.deltaTime = 0;

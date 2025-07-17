@@ -6,6 +6,7 @@ import Block from "./blocks/block.js";
 import MovingBlock from "./blocks/movingBlock.js";
 import Entity from "./entities/entity.js"; 
 import Player from "./entities/player.js";
+import LevelLoader from "./levelLoader.js"
 
 /**
  * @typedef {import('./render.js').default} Render
@@ -20,6 +21,7 @@ import Player from "./entities/player.js";
 
 
 export {
+  LevelLoader,
   Player, 
   Entity,
   GameLoop,
