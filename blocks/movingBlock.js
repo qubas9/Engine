@@ -1,30 +1,57 @@
 import { Vector } from "../coretools.js";
 import { Block } from "../engine.js";
 
+class MovingBlockConfig {
+    constructor(startx, starty, endx, endy, routeTime, imageSrc, width, height, render, physic, friction = 0.99, onLoadCallback) {
+        this.startx = startx;
+        this.starty = starty;
+        this.endx = endx;
+        this.endy = endy;
+        this.routeTime = routeTime;
+        this.imageSrc = imageSrc;
+        this.width = width;
+        this.height = height;
+        this.render = render;
+        this.physic = physic;
+        this.friction = friction;
+        this.onLoadCallback = onLoadCallback;
+    }
+}
+
 class MovingBlock extends Block {
     /**
      * Creates an instance of the MovingBlock class.
-     * @param {number} startx - The start x-coordinate of the block`s path.
-     * @param {number} starty - The start y-coordinate of the block`s path.
-     * @param {number} endx - The end x-coordinate of the block`s path.
-     * @param {number} endy - The end y-coordinate of the block`s path
-     * @param {number} routeTime - The time it takes to move from start to end (in seconds).
-     * @param {string} imageSrc - The URL of the image for the block.
-     * @param {number} width - The width of the block.
-     * @param {number} height - The height of the block.
-     * @param {Render} render - An instance of the Render class to which this block will be added.
-     * @param {Function} onLoadCallback - A callback function that is called when the image is loaded (optional).
+     * @param {MovingBlockConfig} config - Configuration object for creating a MovingBlock.
      */
-    constructor(startx, starty,endx,endy,routeTime, imageSrc, width, height, render, physic, friction, onLoadCallback) {
-        super(startx, starty, imageSrc, width, height, render, physic,friction, onLoadCallback);
-        physic.addUpdatable(this); // Assuming physic is an instance of a class that manages updatable objects
-        this.velocity = new Vector((endx - startx) / routeTime, (endy - starty) / routeTime);  
-        this.start = this.position.copy(); // Store the starting position 
-        this.end = new Vector(endx, endy); // Store the end position
-        this.exeptedError = 0.00000000000000000000001; // Allowable error for reaching the end
-        this.deltaTime = 0;
-    }
+    constructor(config) {
+        super({
+            x: config.startx,
+            y: config.starty,
+            imageSrc: config.imageSrc,
+            width: config.width,
+            height: config.height,
+            render: config.render,
+            physic: config.physic,
+            friction: config.friction,
+            onLoadCallback: config.onLoadCallback
+        });
+        this.endx = config.endx;
+        this.endy = config.endy;
+        this.routeTime = config.routeTime;
 
+        // Calculate the velocity vector based on start and end positions and route time
+        this.velocity = new Vector((config.endx - config.startx) / config.routeTime, (config.endy - config.starty) / config.routeTime);
+
+        // Store the starting position
+        this.start = this.position.copy();
+
+        // Store the end position
+        this.end = new Vector(config.endx, config.endy);
+
+        // Allowable error for reaching the end
+        this.exeptedError = 0.00000000000000000000001;
+        config.physic.addUpdatable(this)
+    }
     update(deltaTime) {
         this.justTurned = false; // Reset the justTurned flag at the start of each update
         this.deltaTime = deltaTime; // Store the delta time for use in other methods
@@ -33,7 +60,7 @@ class MovingBlock extends Block {
         this.hitbox.updatePosition(this.position);
         
         // Check if the block has reached the end of its path
-        if (Vector.sub(this.position, this.end).mag + this.exeptedError< Vector.mult(this.velocity,deltaTime).mag || Vector.sub(this.position, this.start).mag + this.exeptedError < Vector.mult(this.velocity,deltaTime).mag) {
+        if (Vector.sub(this.position, this.end).mag + this.exeptedError < Vector.mult(this.velocity,deltaTime).mag || Vector.sub(this.position, this.start).mag + this.exeptedError < Vector.mult(this.velocity,deltaTime).mag) {
             // Reverse the velocity to move back to the start
             this.justTurned = true; // Set a flag to indicate the block has just turned
             this.velocity.mult(-1);
@@ -42,28 +69,19 @@ class MovingBlock extends Block {
 
     touching(entity) {
         let velocity = Vector.sub(entity.velocity,this.velocity);
-        velocity.mult(this.friction); // Apply friction to the entity's velocity
+        velocity.mult(this.friction); // Apply friction to the entity's 
         entity.velocity=Vector.add(this.velocity,velocity); // Update the entity's velocity with the modified velocity
     }
 
     onCollision(entity, direction) {
         super.onCollision(entity, direction.copy()); // Call the parent class's onCollision method
-       // super.onCollision(entity, direction); // Call the parent class's onCollision method
-       
-       // Add the block's velocity to the entity's velocityentity.position.add(Vector.mult(this.velocity,this.deltaTime));
        if (entity.velocity.mag+this.exeptedError < this.velocity.mag ) {
 
            entity.velocity.add(this.velocity); // Add the block's velocity to the entity's velocity
        }
+
         // Call the touching method to apply the block's specific behavior
-        // this.touching(entity);
-        // console.log("touching");
-        // console.log(entity);
-        // console.log(this);
-       this.touching(entity);
-        
-        // this.touching(entity); // Call the touching method to apply the block's specific behavior
+        this.touching(entity);
     }
 }
-
 export default MovingBlock; // Ensure MovingBlock is exported as default

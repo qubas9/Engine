@@ -7,16 +7,19 @@ import {Vector} from "./coretools.js";
 class Sprite {
     /**
      * Creates an instance of the Sprite class.
-     * @param {number} x - The x-coordinate of the sprite.
-     * @param {number} y - The y-coordinate of the sprite.
-     * @param {string} imageSrc - The URL of the image for the sprite.
-     * @param {number} width - The width of the sprite.
-     * @param {number} height - The height of the sprite.
-     * @param {Render} Render - An instance of the Render class to which this sprite will be added.
-     * @param {Function} onLoadCallback - A callback function that is called when the image is loaded (optional).
+     * @param {Object} options - An object containing the following properties:
+     *   @property {number} x - The x-coordinate of the sprite's position.
+     *   @property {number} y - The y-coordinate of the sprite's position.
+     *   @property {string} imageSrc - The URL of the image to be displayed as the sprite.
+     *   @property {number} width - The width of the sprite.
+     *   @property {number} height - The height of the sprite.
+     *   @property {Render} render - An instance of the Render class to which this sprite will be added.
+     *   @property {Function} [onLoadCallback] - A callback function that is called when the image is loaded (optional).
      * @throws {Error} If any of the parameters are of incorrect types.
      */
-    constructor(x, y, imageSrc, width, height, render, onLoadCallback) {
+    constructor(options) {
+        const { x, y, imageSrc, width, height, render, onLoadCallback } = options;
+
         if (typeof x !== "number" || typeof y !== "number") {
             throw new Error("x and y must be numbers");
         }
@@ -28,18 +31,19 @@ class Sprite {
         }
   
         this.position = new Vector(x, y); // The position of the sprite as a Vector
-        this.width = width ; // The width of the sprite, 
-        this.height = height ; // The height of the sprite,
+        this.width = width; // The width of the sprite,
+        this.height = height; // The height of the sprite,
         this.image = new Image(); // Create a new image element
         this.loaded = false; // Flag to indicate if the image is loaded
-  
+        this.onLoadCallback = options.onLoadCallback; // Callback function to be called when the image is loaded
         // Handle image loading
         this.image.onload = () => {
             this.loaded = true;
-            if (typeof onLoadCallback === "function") {
-                onLoadCallback(); // Call the provided callback when the image is ready
+            if (typeof this.onLoadCallback === "function") {
+                this.onLoadCallback(); // Call the provided callback when the image is ready
             }
         };
+       
   
         // Handle image loading errors
         this.image.onerror = () => console.error(`Error loading image: ${imageSrc}`);

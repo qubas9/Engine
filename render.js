@@ -7,18 +7,19 @@ import {Sprite} from "./engine.js"; // Ensure Sprite is imported
 class Render {
   /**
    * Creates an instance of the Render class.
-   * @param {number} width - The width of the canvas.
-   * @param {number} height - The height of the canvas.
-   * @param {Array} background - The background color of the canvas (RGB array). Default is light gray.
+   * @param {Object}
+   * @property {number} width - The width of the canvas.
+   * @property {number} height - The height of the canvas.
+   * @property {Array} background - The background color of the canvas (RGB array). Default is light gray.
    */
-  constructor(width, height, scale, background = [250, 250, 250]) {
+  constructor({width, height, scale, background }) {
       this.canvas = document.createElement("canvas");
       this.canvas.width = width;
       this.canvas.height = height;
       this.ctx = this.canvas.getContext("2d"); // Set the scale for the context
       this.ctx.scale(scale, scale); // Apply scaling to the context
       this.sprites = []; // List of all sprites to render
-      this.background = background; // Background color
+      this.background = background || [250,250,250]; // Background color
       document.body.appendChild(this.canvas);
   }
 

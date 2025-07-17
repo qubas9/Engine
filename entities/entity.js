@@ -5,27 +5,41 @@ import {Vector} from "../coretools.js";
 class Entity extends Sprite {
     /**
      * Creates an instance of the Entity class.
-     * @param {number} x - The x-coordinate of the entity.
-     * @param {number} y - The y-coordinate of the entity.
-     * @param {string} imageSrc - The URL of the image for the entity.
-     * @param {number} width - The width of the entity.
-     * @param {number} height - The height of the entity.
-     * @param {Physic} physic - An instance of the Physic class to which this entity will be added.
-     * @param {Vector} gravity - The gravity affecting the entity (default is (0,5)).
-     * @param {Render} render - An instance of the Render class to which this entity will be added.
-     * @param {Function} onloadCallback - A callback function that is called when the
+     * @param {Object} config - Configuration object containing necessary properties.
+     * @param {number} config.x - The x-coordinate of the entity.
+     * @param {number} config.y - The y-coordinate of the entity.
+     * @param {string} config.imageSrc - The URL of the image for the entity.
+     * @param {number} config.width - The width of the entity.
+     * @param {number} config.height - The height of the entity.
+     * @param {Render} config.render - An instance of the Render class to which this entity will be added.
+     * @param {Physic} config.physic - An instance of the Physic class to which this entity will be added.
+     * @param {Vector} [config.gravity=new Vector(0, 500)] - The gravity affecting the entity (default is (0,5)).
+     * @param {Function} config.onLoadCallback - A callback function that is called when the
      */
-    constructor(x, y, imageSrc, width, height,render,physic,gravity = new Vector(0,500), onloadCallback) {
-        super(x, y, imageSrc, width, height, render,onloadCallback);
-        this.hitbox = new Hitbox(new Vector(0, 0), new Vector(width, height), this.position);
-        this.groundSensor = new Hitbox(new Vector(0,this.height+1),new Vector(this.width,this.height+2),this.position); // Array to hold ground sensors
+
+    constructor(config) {
+        const options = {
+            x: config.x,
+            y: config.y,
+            imageSrc: config.imageSrc,
+            width: config.width,
+            height: config.height,
+            render: config.render,
+            onLoadCallback: config.onLoadCallback
+        };
+        super(options);
+        this.hitbox = new Hitbox(new Vector(0, 0), new Vector(this.width, this.height), this.position);
+
+        this.groundSensor = new Hitbox(new Vector(0, this.height ), new Vector(this.width, this.height+1), this.position); // Array to hold ground sensors
         this.onGround = false; // Flag to indicate if the entity is on the ground
         this.velocity = new Vector(0, 0); // Velocity vector for the entity
-        this.aceleration = new Vector(0, 0); // Acceleration vector for the entity
-        this.gravity = gravity; // Default gravity if not provided
-        this.touching = []; //
+
+        this.acceleration = new Vector(0, 0); // Acceleration vector for the entity
+        this.gravity = config.gravity || new Vector(0, 500); // Default gravity if not provided
+        this.inAirDrag = config.inAirDrag 
+        this.touching = [];
         this.pasibleOnGround = []; // Flag to indicate if the entity is pasible on ground
-        physic.addEntity(this); // Assuming physic is an instance of a class that manages entities 
+        config.physic.addEntity(this); // Assuming physic is an instance of a class that manages entities
     }
 
     update(deltaTime) {
@@ -37,10 +51,11 @@ class Entity extends Sprite {
             
         }else{
             this.velocity.add(Vector.mult(this.gravity, deltaTime));
+            this.velocity.mult(this.inAirDrag)
         }
         
         // Update the entity's position based on its velocity
-        this.velocity.add(Vector.mult(this.aceleration, deltaTime));
+        this.velocity.add(Vector.mult(this.acceleration, deltaTime));
         this.position.add(Vector.mult(this.velocity, deltaTime));
         
         // Update the hitbox position
@@ -49,7 +64,7 @@ class Entity extends Sprite {
         this.onGround = this.pasibleOnGround.some((a) => a);
         
         this.pasibleOnGround = []; // Reset onGround flag at the start of each update
-       this.aceleration = new Vector(0, 0); // Reset acceleration after applying it
+       this.acceleration = new Vector(0, 0); // Reset acceleration after applying it
     }
 
     afterUpdate(deltaTime) {
@@ -61,7 +76,7 @@ class Entity extends Sprite {
     }
 
     addAcceleration(acceleration) {
-        this.aceleration.add(acceleration); // Add the given acceleration to the entity's acceleration
+        this.acceleration.add(acceleration); // Add the given acceleration to the entity's acceleration
     }
 
     checkColision(block) {

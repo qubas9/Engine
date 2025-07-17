@@ -13,41 +13,108 @@
         import { GameLoop, Render, Sprite,  Block,  Physic, MovingBlock,Entity,Player } from './engine.js';
         import { Vector } from './coretools.js';
 
-        let render = new Render(2000,2000,4);
-        let physic = new Physic();
-        let gameLoop = new GameLoop(physic, render, 60);
-        for (let i = 0; i < 100; i++) {
-            let block = new Block(i * 20, 400 + (i % 2) * 20, "./testasets/Slimer.png", 16, 16, render, physic);
-            console.log(block);
-        }
-        // for (let i = 0; i < 500; i+=10) {
-        //     for (let j = 0; j < 500; j+=10) {
-        //         let block = new MovingBlock(0,0,i,j,i+1/100000, "./testasets/Slimer.png", 16, 16, render, physic);
-
-        //         console.log(block);
-        // }
-        // }
-       let player = new Player(100, 100, "./testasets/Slimer.png", 16, 16, render, physic);
-        let sprit = new Sprite(400,400,"./testasets/Slimer.png",16,16,render);
-        // let entity = new Entity(100,100,"./testasets/Slimer.png",16,16, render, physic, new Vector(0,500));
-        let block = new Block(100,400,"./testasets/Slimer.png",16,16,render,physic);
-        console.log(render);
-        console.log(sprit);
-        console.log(block);
-        console.log(physic);
-
-       let move = new MovingBlock(10, 390, 200, 390, 10, "./testasets/Slimer.png", 16, 16, render, physic,0.99, gameLoop.start.bind(gameLoop));
-        console.log(move);
-
-
-        // Start the game loop
-
-        // Start the game loop
         
-        // setTimeout(() => {
-        //     gameLoop.stop.bind(gameLoop)
-        //     gameLoop.step.bind(gameLoop,1000)
-        // }, 10000); // Stop after 10 seconds)
+            let render = new Render({width : 2000,height : 2000,scale : 2})
+            let physic = new Physic()
+            let gameLoop =  new GameLoop(physic, render, 60)
+
+            let player = new Player({
+                x: 100,
+                y: 150,
+                imageSrc: "./testasets/Slimer.png",
+                width: 32,
+                height: 32,
+                render: render,
+                physic: physic,
+                onLoadCallback: () => {
+                    gameLoop.start();
+                },
+                callBackMap: {
+                    left: () => player.left(),
+                    right: () => player.right(),
+                    jump: () => player.jump()
+                },
+                onClickAcceleration: 100,
+                jumpAcceleration: 50,
+                gravity: new Vector(0, 100),
+                inAirDrag: 1
+            });
+            console.log(player);
+            for (let i = 0; i < 100; i++) {
+                let block = new Block({
+                    x: i*32,
+                    y: 200,
+                    width: 32,
+                    height: 32,
+                    imageSrc: "./testasets/Slimer.png",
+                    render: render,
+                    physic: physic,
+                    friction: 0.9
+                });
+            }
+            for (let i = 0; i < 100; i++) {
+                let block = new Block({
+                    x: 0,
+                    y: i*32,
+                    width: 32,
+                    height: 32,
+                    imageSrc: "./testasets/Slimer.png",
+                    render: render,
+                    physic: physic
+                });
+            }
+
+            for (let i = 0; i < 100; i++) {
+                let block = new Block({
+                    x: 400,
+                    y: i*32,
+                    width: 32,
+                    height: 32,
+                    imageSrc: "./testasets/Slimer.png",
+                    render: render,
+                    physic: physic
+                });
+            }
+            //lower celing
+            // for (let i = 0; i < 100; i++) {
+            //     let block = new Block({
+            //         x: i*32,
+            //         y: 130,
+            //         width: 32,
+            //         height: 32,
+            //         imageSrc: "./testasets/Slimer.png",
+            //         render: render,
+            //         physic: physic
+            //     });
+            // }
+
+            //higher celing
+            for (let i = 0; i < 100; i++) {
+                let block = new Block({
+                    x: i*32,
+                    y: 50,
+                    width: 32,
+                    height: 32,
+                    imageSrc: "./testasets/Slimer.png",
+                    render: render,
+                    physic: physic
+                });
+            }
+
+            // let movingBlock = new MovingBlock({
+            //     startx: 50,
+            //         starty: 50,
+            //     endx: 50,
+            //     endy: 200,
+            //     routeTime: 2,
+            //         width: 32,
+            //         height: 32,
+            //         imageSrc: "./testasets/Slimer.png",
+            //         render: render,
+            //         physic: physic,
+            //         friction: 0.9
+                    
+            // })
     </script>
 </body>
-</html>
+</html>      
