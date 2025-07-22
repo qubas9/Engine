@@ -43,7 +43,8 @@ class LevelLoader{
             new Block(element.setings)
         }else if (element.type == "player"){
             this.addGame(element.setings)
-            new Player(element.setings)
+            let p = new Player(element.setings)
+            this.render.cameraFolow(p.position)
         }else if (element.type == "entity"){
             this.addGame(element.setings)
             new Entity(element.setings)

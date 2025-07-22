@@ -6,7 +6,7 @@
     <title>Type3Games Testing Environment</title>
 </head>
 <body>
-    <h1>Type3Games Testing Environment</h1>
+    <!-- <h1>Type3Games Testing Environment</h1> -->
     <script type="module" src="./engine.js"></script>
     <script type="module" src="./coretools.js"></script>
     <script type="module" id="main">
@@ -24,10 +24,12 @@
                             imageSrc: "./testasets/Slimer.png",
                             width: 32,
                             height: 32,
-                            onClickAcceleration: 100,
-                            jumpAcceleration: 50,
-                            gravity: new Vector(0, 100),
-                            inAirDrag: 1
+                            onClickAcceleration: 200,
+                            jumpAcceleration: 100,
+                            inAirDrag: 1,
+                            gravity: new Vector(0,300),
+                            maxXSpeed: 640,
+                            maxBoost: 1200
                         }
                     },
                     b:{
@@ -38,24 +40,33 @@
                             imageSrc: "./testasets/Slimer.png",
                             friction: 0.9
                         }
-                    },
+                    }
+                    
+                    ,
                     render:{
-                        width : 2000,
-                        height : 2000,
-                        scale : 2
+                        width : 79*32,
+                        height : 39*32,
+                        scale : 2,
+                        camera: new Vector(32,0),
+                        cameraMaxX: -626,
+                        cameraMinX: 0,
+                        cameraMaxY: 100000,
+                        cameraMinY: 300,
                     },
 
                 },
-                grid:[[   ,   ,"p","p",   ,   ,"p","p",   ,   ,"b"],
-                      ["p","p",   ,   ,"p","p",   ,   ,"p","p"],
+                grid:[[  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,, "p"],
+                      [],
                       [,,,,,,,,,],
                       [,,,,,,,,,],
                       [,,,,,,,,,],
                       [,,,,,,,,,],
-                      [,,,,,,,,"b",],
-                      [,,,,,,,"b",,],
-                      [,,,,,,"b",,,],
-                      ["b","b","b","b","b","b","b","b","b","b"]]
+                      ["b",,,,,,,,"",,,"",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"b"],
+                      ["b",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"b"],
+                      
+                      ["b","",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"b"],
+                      [,"b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b"],
+                    ]
             })
 
             // let render = new Render({width : 2000,height : 2000,scale : 2})

@@ -44,6 +44,8 @@ class Player extends Entity {
         this.controls = new Control(this, input.callBackMap); // Initialize controls for the player
         this.onClickAcceleration = input.onClickAcceleration;
         this.dragCorectionAplied = false
+        this.maxXSpeed = input.maxXSpeed
+        this.maxBoost = input.maxBoost
         this.jumpAcceleration = input.jumpAcceleration; // Set the jump acceleration
         this.controls.bind("left", "a", this.left);
         this.controls.bind("right", "d", this.right);
@@ -62,11 +64,13 @@ class Player extends Entity {
      * @param {Player} This - The current Player instance.
      */
     left(This) {
-        if (This.touching[0]&& !This.dragCorectionAplied){
+        if (This.touching[0]/*&& !This.dragCorectionAplied*/){
             This.dragCorectionAplied = true
             This.touching.forEach((block) => {
                 console.log("right");
-                This.velocity.x /= block.friction
+                if (This.velocity.x < 0){
+                    This.velocity.x /= block.friction
+                }
         })
     }
     This.addAcceleration(new Vector(-This.onClickAcceleration, 0)); // Move left
@@ -78,14 +82,18 @@ class Player extends Entity {
      */
     right(This) {
         
-        if (This.touching[0]&& !This.dragCorectionAplied){
+        if (This.touching[0]/*&& !This.dragCorectionAplied*/){
             This.dragCorectionAplied = true
         This.touching.forEach((block) => {
                 console.log("right");
-                This.velocity.x /= block.friction
+                if (This.velocity.x > 0){
+                    This.velocity.x /= block.friction
+                }
         })
     }
-    This.addAcceleration(new Vector(This.onClickAcceleration, 0)); // Move right
+    if (Math.abs(This.velocity.x) < This.maxXSpeed){
+        This.addAcceleration(new Vector(This.onClickAcceleration, 0)); // Move right
+    }   
     }
 
     /**
