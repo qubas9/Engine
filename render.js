@@ -73,8 +73,8 @@ class Render {
 
        let cy = -this.camera.y+(this.canvas.height/this.scale/2)
        let cx = -this.camera.x + (this.canvas.width/this.scale/2)
-       cx = cx > this.cameraMinX ? this.cameraMinX : cx
-       cx = cx < this.cameraMaxX ? this.cameraMaxX : cx
+       cx = cx < this.cameraMinX ? this.cameraMinX : cx
+       cx = cx > this.cameraMaxX ? this.cameraMaxX : cx
        cy = cy < this.cameraMinY ? this.cameraMinY : cy
        cy = cy > this.cameraMaxY ? this.cameraMaxY : cy 
        console.log("cam",cx," ",cy);
