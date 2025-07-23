@@ -1,3 +1,4 @@
+import { Vector } from "./coretools.js"
 import {Block,Player,Entity,Sprite,MovingBlock,Physic, Render, GameLoop} from "./engine.js"
 
 class LevelLoader{
@@ -60,6 +61,41 @@ class LevelLoader{
     elementLoaded(){
         this.elemetsLoaded.push(true)
     }
+
+    loadLevelFromJSON(json){
+        let obj = JSON.parse(json)
+        for (let element in obj.setings){
+            if(!obj.setings[element].setings){continue}
+            for(let parameter in obj.setings[element].setings){
+                if(obj.setings[element].setings[parameter].x != undefined && obj.setings[element].setings[parameter].y != undefined){
+                    obj.setings[element].setings[parameter] = new Vector(obj.setings[element].setings[parameter].x,obj.setings[element].setings[parameter].y)
+                }
+            }
+        }
+        this.loadLevel(obj)
+    }
+
+  
+    loadJSON(url) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        let callback = ()  => {
+        if (xhr.status === 200) {
+            
+        this.loadLevelFromJSON(xhr.response);
+        } else {
+        throw new Error(`Chyba ${xhr.status} při načítání ${url}`);
+        }
+  }
+        xhr.onload = callback.bind(this) ;
+
+  xhr.onerror = function () {
+    callback('Síťová chyba', null);
+  };
+
+  xhr.send();
+}
+
 
     addGame(setings){
         setings.physic = this.physic

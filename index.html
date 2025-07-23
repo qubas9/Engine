@@ -15,58 +15,61 @@
 
 
             let level = new LevelLoader()
-            level.loadLevel({
-                setings:{
-                    grid:{size:32},
-                    p:{
-                        type:"player",
-                        setings: {
-                            imageSrc: "./testasets/Slimer.png",
-                            width: 32,
-                            height: 32,
-                            onClickAcceleration: 200,
-                            jumpAcceleration: 100,
-                            inAirDrag: 1,
-                            gravity: new Vector(0,300),
-                            maxXSpeed: 640,
-                            maxBoost: 1200
-                        }
-                    },
-                    b:{
-                        type:"block",
-                        setings:{
-                            width: 32,
-                            height: 32,
-                            imageSrc: "./testasets/Slimer.png",
-                            friction: 0.9
-                        }
-                    }
+        //    let levels = JSON.stringify({
+        //         setings:{
+        //             grid:{size:32},
+        //             p:{
+        //                 type:"player",
+        //                 setings: {
+        //                     imageSrc: "./testasets/Slimer.png",
+        //                     width: 32,
+        //                     height: 32,
+        //                     onClickAcceleration: 200,
+        //                     jumpAcceleration: 100,
+        //                     inAirDrag: 1,
+        //                     gravity: new Vector(0,300),
+        //                     maxXSpeed: 640,
+        //                     maxBoost: 1200
+        //                 }
+        //             },
+        //             b:{
+        //                 type:"block",
+        //                 setings:{
+        //                     width: 32,
+        //                     height: 32,
+        //                     imageSrc: "./testasets/Slimer.png",
+        //                     friction: 0.9
+        //                 }
+        //             }
                     
-                    ,
-                    render:{
-                        width : 79*32,
-                        height : 39*32,
-                        scale : 2,
-                        camera: new Vector(32,0),
-                        cameraMinX: -626-8*32,
-                        cameraMaxX: 0,
-                        cameraMaxY: 100000,
-                        cameraMinY: 300,
-                        background: [240,240,240]
-                    },
+        //             ,
+        //             render:{
+        //                 width : 79*32,
+        //                 height : 39*32,
+        //                 scale : 2,
+        //                 camera: new Vector(32,0),
+        //                 cameraMinX: -626-8*32,
+        //                 cameraMaxX: 0,
+        //                 cameraMaxY: 100000,
+        //                 cameraMinY: 300,
+        //                 background: [240,240,240]
+        //             },
 
-                },
-                grid:[[  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,, "p"],
-                      [,],
+        //         },
+        //         grid:[[  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,, "p"],
+        //               [,],
                      
-                      ["b",,,,,,"",,"",,,"",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"b"],
-                      ["b",,,,,,"",,"",,,"",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"b"],
-                      ["b",,,,,,,"","",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"b"],
+        //               ["b",,,,,,"",,"",,,"",,,,,,,,,,,,,,,,,,,,,,,,,,"b","b",,,,,,,,,,,,,,,,,,"b","b","b",,,,,,,,"b"],
+        //               ["b",,,,,,"",,"",,,"",,,,,,,,,,,,,,,,,,,,,,"b","b","b","b","b",,,,,,,,,,,"b","b","b",,,,,,,,,,,,"b",,,,"b"],
+        //               ["b",,,,,,,"","",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"b"],
                       
-                      ["b","",,,,,,,"",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"b"],
-                      [,"b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b"],
-                    ]
-            })
+        //               ["b","",,,,,,,"",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"b"],
+        //               [,"b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b"],
+        //             ]
+        //     })
+        //     console.log(levels);
+            
+            level.loadJSON("./level.json")
 
             // let render = new Render({width : 2000,height : 2000,scale : 2})
             // let physic = new Physic()
