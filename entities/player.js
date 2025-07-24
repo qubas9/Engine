@@ -24,20 +24,7 @@ class Player extends Entity {
      * @param {number} input.jumpAcceleration - The acceleration applied to the player when jumping.
      */
     constructor(input) {
-        super({
-            "x": input.x,
-            "y": input.y,
-            "imageSrc": input.imageSrc,
-            "width": input.width,
-            "height": input.height,
-            "render": input.render,
-            "physic": input.physic,
-            "gravity": input.gravity || new Vector(0, 500),
-            "onLoadCallback": input.onLoadCallback,
-            "onClickAcceleration": input.onClickAcceleration,
-            "jumpAcceleration": input.jumpAcceleration,
-            "inAirDrag": input.inAirDrag
-        });
+        super(input);
         /**
          * @type {Control}
          */

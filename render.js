@@ -13,8 +13,9 @@ class Render {
    * @property {number} height - The height of the canvas.
    * @property {Array} background - The background color of the canvas (RGB array). Default is light gray.
    */
-  constructor({width, height, scale, background,camera ,cameraMinX,cameraMinY,cameraMaxX,cameraMaxY}) {
+  constructor({width, height, scale, background,camera ,cameraMinX,cameraMinY,cameraMaxX,cameraMaxY,debug}) {
       this.canvas = document.createElement("canvas");
+      this.debug = debug |false
       this.camera = camera || new Vector(0,0)
       this.scale = scale
       this.canvas.width = width;
@@ -84,7 +85,8 @@ class Render {
       for (let sprite of this.sprites) {
           if (sprite.loaded && sprite.image) { // Ensure the image is valid and loaded
               this.ctx.drawImage(sprite.image, sprite.position.x, sprite.position.y, sprite.width, sprite.height);
-                        }
+            }
+            if (!this.debug) {continue}
             if (sprite.hitbox) {
                 // Draw the hitbox for debugging purposes
                 this.ctx.strokeStyle = "red"; // Set hitbox color to red

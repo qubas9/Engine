@@ -25,6 +25,7 @@ class LevelLoader{
             level.grid.forEach((array,i) => {
                 array.forEach((e,j) => {
                     if(e){
+                        if (!setings[e]){throw new Error("Element is not in setings")}
                         let element = {...setings[e]}
                         element.setings.onLoadCallback = this.elementLoaded.bind(this)
                         element.setings.y = i*setings.grid.size

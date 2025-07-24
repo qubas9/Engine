@@ -28,6 +28,7 @@ class Entity extends Sprite {
             onLoadCallback: config.onLoadCallback
         };
         super(options);
+        this.colisionOfsset = config.colisionOfsset || 1
         this.hitbox = new Hitbox(new Vector(0, 0), new Vector(this.width, this.height), this.position);
 
         this.groundSensor = new Hitbox(new Vector(0, this.height ), new Vector(this.width, this.height+1), this.position); // Array to hold ground sensors
@@ -100,26 +101,26 @@ class Entity extends Sprite {
             if (positionDiferenc.y > 0) {
                 // Collision from above
                 console.log("Collision from above");
-                this.position.y = block.hitbox.position.y - this.height-1;
+                this.position.y = block.hitbox.position.y - this.height-this.colisionOfsset;
                 block.onCollision(this, new Vector(0,1)); // Notify the block of the collision
                 this.onGround = true; // Set onGround to true
                 this.pasibleOnGround.push(true); // Add to pasibleOnGround array
             }else {
                 // Collision from below
                 console.log("Collision from below");
-                this.position.y = block.hitbox.position.y + block.hitbox.offset2.y+1;
+                this.position.y = block.hitbox.position.y + block.hitbox.offset2.y+this.colisionOfsset;
                 block.onCollision(this,new Vector(0,-1)); // Notify the block of the collision
             }
         }else {
             if (positionDiferenc.x > 0) {
                 // Collision from the left
                 console.log("Collision from the left");
-                this.position.x = block.hitbox.position.x - this.width-1;
+                this.position.x = block.hitbox.position.x - this.width-this.colisionOfsset;
                 block.onCollision(this, new Vector(1,0)); // Notify the block of the collision
             } else {
                 console.log("Collision from the right");
                 // Collision from the right
-                this.position.x = block.hitbox.position.x + block.hitbox.offset2.x+1;
+                this.position.x = block.hitbox.position.x + block.hitbox.offset2.x+this.colisionOfsset;
                 block.onCollision(this, new Vector(-1,0)); // Notify the block of the collision
             }
         }
