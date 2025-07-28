@@ -1,14 +1,13 @@
 {
-  "setings": {
-    "grid": {
+  "setings": {"grid": {
       "size": 32
     },
     "p": {
       "type": "player",
       "setings": {
-        "imageSrc": "./testasets/Slimer.png",
-        "width": 32,
-        "height": 32,
+        "imageSrc": "./testasets/Slimer1.png",
+        "width": 30,
+        "height": 30,
         "onClickAcceleration": 200,
         "jumpAcceleration": 110,
         "inAirDrag": 1,
@@ -21,23 +20,28 @@
         "colisionOfsset": 0.1
       }
     },
-    "b": {
-      "type": "block",
-      "setings": {
-        "width": 32,
-        "height": 32,
-        "imageSrc": "./testasets/Stone-Brick.png",
-        "friction": 0.9
+     "b": {
+        "type": "block",
+        "setings": {
+            "width": 32,
+            "height": 32,
+            "imageSrc": "./testasets/Stone-Brick.png",
+            "friction": 0.9
+      }
+    },
+    "s": {
+        "type": "sprite",
+        "setings": {
+            "width": 32,
+            "height": 32,
+            "imageSrc": "./testasets/Stone-Brick.png"
+          
       }
     },
     "render": {
       "width": 2528,
-      "height": 1248,
+      "height": 1252,
       "scale": 2,
-      "camera": {
-        "x": 32,
-        "y": 0
-      },
       "cameraMinX": -882,
       "cameraMaxX": 0,
       "cameraMaxY": 100000,
@@ -45,29 +49,19 @@
       "background": [240, 240, 240]
     }
   },
-  "grid": [
-    
-    [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "p"],
-
-    
-    [null],
-
-    
-    ["b", null, null, null, null, null, "", null, "", null, null, "", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "b"],
-
-    
-    ["b", null, null, null, null, null, "", null, "", null, null, "", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "b", "b", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "b", "b", "b", null, null, null, null, null, null, null, null, null, "b"],
-
-    
-    ["b", null, null, null, null, null, "", null, "", null, null, "", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "", "b", "b", "b", "b", null, null, null, null, null, null, null, null, null, null, "b", "b", "b", null, null, null, null, null, null, null, null, null, null, null, null, null,"b", null,null, null,  "b"],
-
-    
-    ["b", "b", null, null, null, null, null, "", "", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "b"],
-
-    
-    ["b", "", null, null, null, null, null, null, "", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "b", "", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "b"],
-
-    
-    [null,"b","b","b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b","b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b"]
+   
+  "grid": [   
+    ["b","p", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "","b"],   
+    ["b", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "","b"],
+    ["b", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "","b","b", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "","b","b","b", "", "", "", "", "", "", "", "", "","b"],
+    ["b", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "","b","b","b","b", "", "", "", "", "", "", "", "", "", "","b","b","b", "", "", "", "", "", "", "", "", "", "", "", "", "","b", "", "", "","b"],
+    ["b", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "","b"], 
+    ["b", "", "", "","s","s","s", "p", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "","b", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "","b"],  
+    ["b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b"],
+    ["b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b"],  
+    ["b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b"],
+    ["b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b"],
+    ["b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b","b"]
+  
   ]
 }
