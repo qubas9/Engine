@@ -5,3 +5,5 @@ babel.config.js
 jest.setup.js
 index.html
 eslint.config.js
+cloc.ignore
+level.json
