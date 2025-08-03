@@ -9,8 +9,8 @@ class Render {
   /**
    * Creates an instance of the Render class.
    * @param {Object}
-   * @property {number} width - The width of the canvas.
-   * @property {number} height - The height of the canvas.
+   * @property {number} width - The width of the canvas.(default window.innerWidth)
+   * @property {number} height - The height of the canvas.(default window.innerHeight)
    * @property {Array} background - The background color of the canvas (RGB array). Default is light gray.
    */
   constructor({width, height, scale, background,camera ,cameraMinX,cameraMinY,cameraMaxX,cameraMaxY,debug}) {
@@ -18,8 +18,8 @@ class Render {
       this.debug = debug |false
       this.camera = camera || new Vector(0,0)
       this.scale = scale
-      this.canvas.width = width;
-      this.canvas.height = height;
+      this.canvas.width = width|| window.innerWidth;
+      this.canvas.height = height||window.innerHeight;
       this.ctx = this.canvas.getContext("2d"); // Set the scale for the context
       this.background = background || [250,250,250]; // Background color
       this.sprites = []; // List of all sprites to render
@@ -47,8 +47,8 @@ class Render {
      * @param {number} x - The x-coordinate of the sprite.
      * @param {number} y - The y-coordinate of the sprite.
      * @param {string} imageSrc - The URL of the image for the sprite.
-     * @param {number} width - The width of the sprite.
-     * @param {number} height - The height of the sprite.
+     * @param {number} width - The width of the sprite. 
+     * @param {number} height - The height of the sprite. 
      * @returns {Sprite} A new instance of the Sprite class.
     */
    makeSprite(x, y, imageSrc, width, height) {

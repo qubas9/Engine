@@ -23,6 +23,7 @@ class LevelLoader{
 
         if (level.grid){
             level.grid.forEach((array,i) => {
+                if (array.length > this.maxX)
                 array.forEach((e,j) => {
                     if(e){
                         if (!setings[e]){throw new Error("Element is not in setings")}
