@@ -17,7 +17,7 @@ class LevelLoader{
             setings = level.setings
         }
 
-        for(element in setings){
+        for(let element in setings){
             setings[element].setings.imageSrc = this.pathPrefix + setings[element].setings.imageSrc
         }
 
