@@ -17,7 +17,7 @@
         },
         "maxXSpeed": 640,
         "maxBoost": 1200,
-        "colisionOfsset": 0.1
+        "colisionOfsset": 0.3
       }
     },
      "b": {

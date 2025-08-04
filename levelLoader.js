@@ -64,8 +64,9 @@ class LevelLoader{
         this.elemetsLoaded.push(true)
     }
 
-    loadLevelFromJSON(json){
+    praseJSON(json){
         let obj = JSON.parse(json)
+        if (obj.setings == "default"){return obj}
         for (let element in obj.setings){
             if(!obj.setings[element].setings){continue}
             for(let parameter in obj.setings[element].setings){
@@ -74,7 +75,7 @@ class LevelLoader{
                 }
             }
         }
-        this.loadLevel(obj)
+        return obj
     }
 
   
@@ -84,7 +85,7 @@ class LevelLoader{
         let callback = ()  => {
         if (xhr.status === 200) {
             
-        this.loadLevelFromJSON(xhr.response);
+        this.loadLevel(this.praseJSON(xhr.response));
         } else {
         throw new Error(`Chyba ${xhr.status} při načítání ${url}`);
         }
@@ -98,25 +99,25 @@ class LevelLoader{
   xhr.send();
 }
 
-// loadDefaultFromJSON(url){
-//         const xhr = new XMLHttpRequest();
-//         xhr.open('GET', url, true);
-//         let callback = ()  => {
-//         if (xhr.status === 200) {
+loadDefaultFromJSON(url){
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        let callback = ()  => {
+        if (xhr.status === 200) {
             
-//         this.defaulSetings = this.parseJSON(xhr.response)
-//         } else {
-//         throw new Error(`Chyba ${xhr.status} při načítání ${url}`);
-//         }
-//   }
-//         xhr.onload = callback.bind(this) ;
+        this.defaulSetings = this.parseJSON(xhr.response)
+        } else {
+        throw new Error(`Chyba ${xhr.status} při načítání ${url}`);
+        }
+  }
+        xhr.onload = callback.bind(this) ;
 
-//   xhr.onerror = function () {
-//     callback('Síťová chyba', null);
-//   };
+  xhr.onerror = function () {
+    callback('Síťová chyba', null);
+  };
 
-//   xhr.send();
-//     }
+  xhr.send();
+    }
 
     addGame(setings){
         setings.physic = this.physic
