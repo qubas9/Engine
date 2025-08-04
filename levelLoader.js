@@ -17,9 +17,9 @@ class LevelLoader{
             setings = level.setings
         }
 
-        setings.forEach((element)=>{
-            element.setings.imageSrc = this.pathPrefix + element.setings.imageSrc
-        })
+        for(element in setings){
+            setings[element].setings.imageSrc = this.pathPrefix + setings[element].setings.imageSrc
+        }
 
         this.physic = new Physic()
         this.render = new Render(setings.render || {with: 200, height: 200, scale:1})
