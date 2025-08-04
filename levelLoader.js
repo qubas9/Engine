@@ -105,7 +105,7 @@ loadDefaultFromJSON(url){
         let callback = ()  => {
         if (xhr.status === 200) {
             
-        this.defaulSetings = this.parseJSON(xhr.response)
+        this.defaulSetings = this.parseJSON(xhr.response).setings
         } else {
         throw new Error(`Chyba ${xhr.status} při načítání ${url}`);
         }
