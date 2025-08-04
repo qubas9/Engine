@@ -2,10 +2,11 @@ import { Vector } from "./coretools.js"
 import {Block,Player,Entity,Sprite,MovingBlock,Physic, Render, GameLoop} from "./engine.js"
 
 class LevelLoader{
-    constructor(setings){
+    constructor(setings,pathPrefix){
         if (setings){
             this.defaulSetings = setings
         }
+        this.pathPrefix = pathPrefix || ""
     }
 
     loadLevel(level){
@@ -81,7 +82,7 @@ class LevelLoader{
   
     loadJSON(url) {
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', url, true);
+        xhr.open('GET', this.pathPrefix + url, true);
         let callback = ()  => {
         if (xhr.status === 200) {
             
@@ -101,7 +102,7 @@ class LevelLoader{
 
 loadDefaultFromJSON(url){
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', url, true);
+        xhr.open('GET', this.pathPrefix + url, true);
         let callback = ()  => {
         if (xhr.status === 200) {
             
