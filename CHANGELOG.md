@@ -2,6 +2,10 @@
 
 NOT All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+-Nothing changed just test of discord relese notifications
+
 ## [1.7.0] - 2025-08-04
 
 ### ADD
