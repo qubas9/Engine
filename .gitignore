@@ -3,5 +3,5 @@ tests
 
 babel.config.js
 jest.setup.js
-
+.release-it.json
 eslint.config.js

@@ -7,3 +7,4 @@ index.html
 eslint.config.js
 cloc.ignore
 level.json
+.release-it.json

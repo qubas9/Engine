@@ -27,10 +27,11 @@
   "devDependencies": {
     "@babel/core": "^7.28.0",
     "@babel/preset-env": "^7.28.0",
+    "@release-it/keep-a-changelog": "^7.0.0",
     "babel-jest": "^30.0.4",
     "canvas": "^3.1.2",
     "jest": "^30.0.4",
-    "jest-environment-jsdom": "^30.0.4"
-  },
-  "dependencies": {}
+    "jest-environment-jsdom": "^30.0.4",
+    "release-it": "^19.0.4"
+  }
 }
