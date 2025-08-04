@@ -32,6 +32,7 @@ class LevelLoader{
                         element.setings.onLoadCallback = this.elementLoaded.bind(this)
                         element.setings.y = i*setings.grid.size
                         element.setings.x = j*setings.grid.size
+                        element.setings.imageSrc = this.pathPrefix + element.setings.imageSrc
                         this.addElement(element)
                         this.numOfElements++
                     }
