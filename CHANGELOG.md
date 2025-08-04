@@ -2,7 +2,7 @@
 
 NOT All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [1.7.0] - 2025-08-04
 
 ### ADD
 -MovingBlock
@@ -13,4 +13,3 @@ NOT All notable changes to this project will be documented in this file.
 -LevelLoader
 -Render
 -GameLoop
-
