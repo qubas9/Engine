@@ -64,7 +64,7 @@ class LevelLoader{
         this.elemetsLoaded.push(true)
     }
 
-    praseJSON(json){
+    parseJSON(json){
         let obj = JSON.parse(json)
         if (obj.setings == "default"){return obj}
         for (let element in obj.setings){
@@ -85,7 +85,7 @@ class LevelLoader{
         let callback = ()  => {
         if (xhr.status === 200) {
             
-        this.loadLevel(this.praseJSON(xhr.response));
+        this.loadLevel(this.parseJSON(xhr.response));
         } else {
         throw new Error(`Chyba ${xhr.status} při načítání ${url}`);
         }
