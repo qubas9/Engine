@@ -16,6 +16,11 @@ class LevelLoader{
         }else{
             setings = level.setings
         }
+
+        setings.forEach((element)=>{
+            element.setings.imageSrc = this.pathPrefix + element.setings.imageSrc
+        })
+
         this.physic = new Physic()
         this.render = new Render(setings.render || {with: 200, height: 200, scale:1})
         this.elemetsLoaded = []
@@ -32,7 +37,6 @@ class LevelLoader{
                         element.setings.onLoadCallback = this.elementLoaded.bind(this)
                         element.setings.y = i*setings.grid.size
                         element.setings.x = j*setings.grid.size
-                        element.setings.imageSrc = this.pathPrefix + element.setings.imageSrc
                         this.addElement(element)
                         this.numOfElements++
                     }
