@@ -23,7 +23,7 @@ class LevelLoader{
 
         if (level.grid){
             level.grid.forEach((array,i) => {
-                if (array.length > this.maxX)
+                // if (array.length > this.maxX)
                 array.forEach((e,j) => {
                     if(e){
                         if (!setings[e]){throw new Error("Element is not in setings")}
@@ -98,6 +98,25 @@ class LevelLoader{
   xhr.send();
 }
 
+// loadDefaultFromJSON(url){
+//         const xhr = new XMLHttpRequest();
+//         xhr.open('GET', url, true);
+//         let callback = ()  => {
+//         if (xhr.status === 200) {
+            
+//         this.defaulSetings = this.parseJSON(xhr.response)
+//         } else {
+//         throw new Error(`Chyba ${xhr.status} při načítání ${url}`);
+//         }
+//   }
+//         xhr.onload = callback.bind(this) ;
+
+//   xhr.onerror = function () {
+//     callback('Síťová chyba', null);
+//   };
+
+//   xhr.send();
+//     }
 
     addGame(setings){
         setings.physic = this.physic
