@@ -47,8 +47,7 @@ class LevelLoader{
                 })
             });
         }
-        this.render.cameraMaxX = this.xmax * setings.grid.size
-        this.render.cameraMaxY = this.ymax * setings.grid.size
+        this.render.setCameraBoundres(this.xmax * setings.grid.size,(this.ymax+1) * setings.grid.size)
         this.waitToLoad(setings);
         }
 

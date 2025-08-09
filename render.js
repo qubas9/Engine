@@ -36,14 +36,23 @@ class Render {
 
       this.ctx = this.canvas.getContext("2d"); // Set the scale for the context
       this.background = background || [250,250,250]; // Background color
-      this.sprites = []; // List of all sprites to render
-      this.cameraMinX = cameraMinX
-      this.cameraMaxX = cameraMaxX
-      this.cameraMaxY = cameraMaxY
-      this.cameraMinY = cameraMinY
+      this.sprites = []; // List of all sprites to render  
+      this.setCameraBoundres(cameraMaxX || this.canvas.width, cameraMaxY || this.canvas.height);
       document.body.appendChild(this.canvas);
     }
     
+
+    setCameraBoundres(maxX, maxY) {
+        if (typeof maxX !== "number" || typeof maxY !== "number") {
+            throw new Error("maxX and maxY must be numbers");
+        }
+        this.cameraMaxX = maxX;
+        this.cameraMaxY = maxY;
+        this.cameraMinX = 0; // Reset cameraMinX to 0
+        this.cameraMinY = (this.canvas.height / this.scale) - this.cameraMaxY
+        this.cameraMinY = this.cameraMinY < 0 ? 0 : this.cameraMinY; // Ensure cameraMinY is not negative
+    }
+
     /**
      * Adds a sprite to the list of sprites to be rendered.
      * @param {Sprite} sprite - An instance of the Sprite class to be added.
@@ -85,21 +94,28 @@ class Render {
        this.ctx.fillStyle = `rgb(${this.background[0]},${this.background[1]},${this.background[2]})`;
        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
        
-       let cy = -(this.camera.y - this.canvas.height /2/this.scale)*this.scale;
+       let cy = this.camera.y;
        let cx = this.camera.x ;
        let windowX = cx - this.canvas.width /2/this.scale;
-       //    let windowY = cy - this.canvas.height / 2;
+       let windowY = cy - this.canvas.height / 2/this.scale;
        
-       if(windowX < this.cameraMinX){
+       console.log(`Camera position: ${windowX}, ${windowY}, MinX: ${this.cameraMinX}, MinY: ${this.cameraMinY}, MaxX: ${this.cameraMaxX}, MaxY: ${this.cameraMaxY}`);
+       if(windowX <  this.cameraMinX){
            cx = this.cameraMinX
         }else if((windowX + this.canvas.width/this.scale) > this.cameraMaxX){
             cx = -(this.cameraMaxX- this.canvas.width/this.scale)*this.scale
         }else{
             cx = -windowX*this.scale
+            
+        }
+        if(windowY < this.cameraMinY){
+            cy = this.cameraMinY*this.scale
+        }else if((windowY + this.canvas.height/this.scale) > this.cameraMaxY){
+            cy = -(this.cameraMaxY - this.canvas.height/this.scale)*this.scale
+        }else{
+            cy = -windowY*this.scale
         }
         
-        
-        console.log(`Camera position: ${cx}, ${cy}`);
         
         this.ctx.translate(cx,cy); // Translate the context to the camera position
         this.ctx.scale(this.scale,this.scale); // Apply scaling to the context
