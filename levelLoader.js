@@ -7,6 +7,8 @@ class LevelLoader{
             this.defaulSetings = setings
         }
         this.pathPrefix = pathPrefix || ""
+        this.xmax = 0
+        this.ymax = 0
     }
 
     loadLevel(level){
@@ -30,7 +32,8 @@ class LevelLoader{
 
         if (level.grid){
             level.grid.forEach((array,i) => {
-                // if (array.length > this.maxX)
+                if (array.length > this.xmax){this.xmax = array.length}
+                if (i > this.ymax){this.ymax = i}
                 array.forEach((e,j) => {
                     if(e){
                         if (!setings[e]){throw new Error("Element is not in setings")}
@@ -44,6 +47,8 @@ class LevelLoader{
                 })
             });
         }
+        this.render.cameraMaxX = this.xmax * setings.grid.size
+        this.render.cameraMaxY = this.ymax * setings.grid.size
         this.waitToLoad(setings);
         }
 
