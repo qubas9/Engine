@@ -99,7 +99,7 @@ class Render {
        let windowX = cx - this.canvas.width /2/this.scale;
        let windowY = cy - this.canvas.height / 2/this.scale;
        
-       console.log(`Camera position: ${windowX}, ${windowY}, MinX: ${this.cameraMinX}, MinY: ${this.cameraMinY}, MaxX: ${this.cameraMaxX}, MaxY: ${this.cameraMaxY}`);
+       //console.log(`Camera position: ${windowX}, ${windowY}, MinX: ${this.cameraMinX}, MinY: ${this.cameraMinY}, MaxX: ${this.cameraMaxX}, MaxY: ${this.cameraMaxY}`);
        if(windowX <  this.cameraMinX){
            cx = this.cameraMinX
         }else if((windowX + this.canvas.width/this.scale) > this.cameraMaxX){

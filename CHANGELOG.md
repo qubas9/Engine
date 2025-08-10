@@ -7,6 +7,7 @@ NOT All notable changes to this project will be documented in this file.
 ### ADD
 
 -automatic camera boundres
+-moving block suport in level
 
 ### REMOVED
 
