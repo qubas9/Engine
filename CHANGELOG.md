@@ -4,6 +4,8 @@ NOT All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [2.0.0] - 2025-08-11
+
 ### ADD
 
 -automatic camera boundres
