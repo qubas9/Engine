@@ -4,6 +4,10 @@ NOT All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### ADD
+
+-new coretool Event It alow inner comunication based on events 
+
 ## [2.0.0] - 2025-08-11
 
 ### ADD

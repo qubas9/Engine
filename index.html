@@ -9,10 +9,17 @@
     
     <script type="module" src="./engine.js"></script>
     <script type="module">
-        import {LevelLoader} from "./engine.js"
-        let l = new LevelLoader()
-        l.loadJSON("level.json")
-        //console.log(0)
+        // import {LevelLoader} from "./engine.js"
+        // let l = new LevelLoader()
+        // l.loadJSON("level.json")
+        // //console.log(0)
+        import {Event} from "./coretools.js"
+        let e = Event.on("test", (a,b,c) => {
+            console.log("Event triggered", a, b, c)
+        })
+        Event.emit("test", 1, 2, 3)
+        Event.off(-1)
+        Event.emit("test", 1, 2, 3)
     </script>
 </body>
 </html>
