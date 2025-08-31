@@ -1,5 +1,5 @@
-import { Vector } from "./coretools.js"
-import {Block,Player,Entity,Sprite,MovingBlock,Physic, Render, GameLoop} from "./engine.js"
+import { Vector,Event } from "./coretools.js"
+import {EventBlock,Block,Player,Entity,Sprite,MovingBlock,Physic, Render, GameLoop} from "./engine.js"
 
 class LevelLoader{
     constructor(setings,pathPrefix){
@@ -70,22 +70,30 @@ class LevelLoader{
         }
 
     addElement(element){
-        if (element.type == "block"){
-            this.addGame(element.setings)
-            new Block(element.setings)
-        }else if (element.type == "player"){
-            this.addGame(element.setings)
-            let p = new Player(element.setings)
-            this.render.cameraFolow(p.position)
-        }else if (element.type == "entity"){
-            this.addGame(element.setings)
-            new Entity(element.setings)
-        }else if (element.type == "sprite"){
-            this.addGame(element.setings)
-            new Sprite(element.setings)
-        }else if (element.type == "movingBlock"){
-            this.addGame(element.setings)
-            new MovingBlock(element.setings)
+        this.addGame(element.setings);
+        switch (element.type) {
+            case "block":
+            new Block(element.setings);
+            break;
+            case "player":
+            let p = new Player(element.setings);
+            this.render.cameraFolow(p.position);
+            break;
+            case "entity":
+            new Entity(element.setings);
+            break;
+            case "sprite":
+            new Sprite(element.setings);
+            break;
+            case "movingBlock":
+            new MovingBlock(element.setings);
+            break;
+            case "eventBlock":
+            new EventBlock(element.setings);
+            break;
+            default:
+                console.warn(`Unknown element type: ${element.type}`);
+                break;
         }
     }
 
@@ -162,6 +170,7 @@ loadDefaultFromJSON(url){
             setings.GameLoop = this.addGame(setings.GameLoop || {fps:60,physic:{},render:{}})
             this.GameLoop = new GameLoop(setings.GameLoop)
             this.GameLoop.start()
+             Event.on("End",(() => {this.GameLoop.stop(); alert("Game Over")}).bind(this))
             }
           }
 }
