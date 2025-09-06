@@ -2,16 +2,20 @@ import { Vector,Event } from "./coretools.js"
 import {EventMovingBlock,EventBlock,Block,Player,Entity,Sprite,MovingBlock,Physic, Render, GameLoop} from "./engine.js"
 
 class LevelLoader{
-    constructor(setings,pathPrefix){
+    constructor({setings,pathPrefix,levelList}){
         if (setings){
             this.defaulSetings = setings
         }
         this.pathPrefix = pathPrefix || ""
         this.xmax = 0
         this.ymax = 0
+        this.levelList = levelList
+        Event.on("NextLevel",this.nextLevel.bind(this))
+        Event.on("End",(() => {this.GameLoop.stop(); this.render.destroy();}).bind(this))
     }
 
     loadLevel(level){
+        this.currentLevel = level.name || "unnamedLevel"
         let setings
         if(level.setings == "default" && this.defaulSetings){
             setings = this.defaulSetings
@@ -124,8 +128,12 @@ class LevelLoader{
         xhr.open('GET', this.pathPrefix + url, true);
         let callback = ()  => {
         if (xhr.status === 200) {
-            
-        this.loadLevel(this.parseJSON(xhr.response));
+        let level = this.parseJSON(xhr.response)
+        if (!level.name){
+            level.name = url.replace(/^.*[\\/]/, "")
+            level.name = level.name.split(".")[0]
+        }
+        this.loadLevel(level);
         } else {
         throw new Error(`Chyba ${xhr.status} při načítání ${url}`);
         }
@@ -173,9 +181,32 @@ loadDefaultFromJSON(url){
             setings.GameLoop = this.addGame(setings.GameLoop || {fps:60,physic:{},render:{}})
             this.GameLoop = new GameLoop(setings.GameLoop)
             this.GameLoop.start()
-            this.EndEvent = Event.on("End",(() => {this.GameLoop.stop(); this.render.destroy();Event.off(this.EndEvent)}).bind(this))
             }
           }
+    nextLevel(){
+        if (!this.levelList || !Array.isArray(this.levelList) || this.levelList.length === 0) {
+            console.warn("Level list is missing or empty.");
+            return;
+        }
+        if (!this.currentLevel || this.currentLevel === "unnamedLevel") {
+            console.warn("Current level is not set or is unnamed.");
+            return;
+        }
+        const currentLevelIndex = this.levelList.indexOf(this.currentLevel);
+        if (currentLevelIndex === -1) {
+            console.warn(`Current level '${this.currentLevel}' not found in level list.`);
+            return;
+        }
+        const nextLevelIndex = (currentLevelIndex + 1);
+        if (nextLevelIndex >= this.levelList.length) {
+            Event.emit("NoMoreLevels");
+            console.warn("No more levels available.");
+            return;
+        }
+        this.currentLevel = this.levelList[nextLevelIndex];
+        Event.emit("End");
+        this.loadJSON(this.pathPrefix + this.currentLevel+".json");
+    }
 }
 
 export default LevelLoader

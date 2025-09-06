@@ -10,11 +10,12 @@
     <script type="module" src="./engine.js"></script>
     <script type="module">
         import {LevelLoader} from "./engine.js"
-        let l = new LevelLoader()
-        l.loadJSON("level1.json")
+        let l = new LevelLoader({levelList:["level","level1"]})
+        l.loadJSON("level.json")
         //console.log(0)
        import {Event,Vector} from "./coretools.js"
-       Event.on("endy",(obj)=>{Event.emit("End");l.loadJSON("level1.json")})
+       Event.on("endy",(obj)=>{Event.emit("NextLevel")})
+       Event.on("NoMoreLevels",() => {Event.emit("End");l.loadJSON("level.json");})
     </script>
 </body>
 </html>

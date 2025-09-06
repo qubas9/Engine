@@ -8,6 +8,7 @@ NOT All notable changes to this project will be documented in this file.
 
 -new coretool Event It alow inner comunication based on events 
 -new EventBlock and EventMovingBlock that emit custom events insted of normal onCollision and touching functions
+-levelLoader can now load nex level from a list of levels gived to it and emit NoMoreLevels when it tryes to load beond last level
 
 ### FIX
 
