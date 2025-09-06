@@ -1,5 +1,5 @@
 import { Vector,Event } from "./coretools.js"
-import {EventBlock,Block,Player,Entity,Sprite,MovingBlock,Physic, Render, GameLoop} from "./engine.js"
+import {EventMovingBlock,EventBlock,Block,Player,Entity,Sprite,MovingBlock,Physic, Render, GameLoop} from "./engine.js"
 
 class LevelLoader{
     constructor(setings,pathPrefix){
@@ -90,6 +90,9 @@ class LevelLoader{
             break;
             case "eventBlock":
             new EventBlock(element.setings);
+            break;
+            case "eventMovingBlock":
+            new EventMovingBlock(element.setings);
             break;
             default:
                 console.warn(`Unknown element type: ${element.type}`);

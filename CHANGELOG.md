@@ -7,7 +7,7 @@ NOT All notable changes to this project will be documented in this file.
 ### ADD
 
 -new coretool Event It alow inner comunication based on events 
--new EventBlock that emit custom events insted of normal onCollision and touching functions
+-new EventBlock and EventMovingBlock that emit custom events insted of normal onCollision and touching functions
 
 ### FIX
 

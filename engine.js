@@ -8,6 +8,7 @@ import Entity from "./entities/entity.js";
 import Player from "./entities/player.js";
 import LevelLoader from "./levelLoader.js";
 import EventBlock from "./blocks/eventBlock.js";
+import EventMovingBlock from "./blocks/eventMovingBlock.js";
 
 /**
  * @typedef {import('./render.js').default} Render
@@ -32,5 +33,6 @@ export {
   Block,
   Physic,
   MovingBlock,
-  EventBlock
+  EventBlock,
+  EventMovingBlock
 };
