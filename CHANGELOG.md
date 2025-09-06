@@ -7,6 +7,11 @@ NOT All notable changes to this project will be documented in this file.
 ### ADD
 
 -new coretool Event It alow inner comunication based on events 
+-new EventBlock that emit custom events insted of normal onCollision and touching functions
+
+### FIX
+
+-better entity colisions
 
 ## [2.0.0] - 2025-08-11
 
