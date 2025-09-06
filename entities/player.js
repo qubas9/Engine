@@ -109,11 +109,12 @@ class Player extends Entity {
     update(deltaTime) {
         this.dragCorectionAplied = false
        super.update(deltaTime); // Call the parent class's update method
-         // Update controls
+       // Update controls
     }
-
+    
     afterUpdate(deltaTime){
         this.controls.update(deltaTime);
+        super.afterUpdate(deltaTime);
     }
 }
 
