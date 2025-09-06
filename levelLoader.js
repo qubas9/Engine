@@ -170,7 +170,7 @@ loadDefaultFromJSON(url){
             setings.GameLoop = this.addGame(setings.GameLoop || {fps:60,physic:{},render:{}})
             this.GameLoop = new GameLoop(setings.GameLoop)
             this.GameLoop.start()
-             Event.on("End",(() => {this.GameLoop.stop(); alert("Game Over")}).bind(this))
+            this.EndEvent = Event.on("End",(() => {this.GameLoop.stop(); this.render.destroy();Event.off(this.EndEvent)}).bind(this))
             }
           }
 }

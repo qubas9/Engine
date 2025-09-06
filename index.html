@@ -11,10 +11,10 @@
     <script type="module">
         import {LevelLoader} from "./engine.js"
         let l = new LevelLoader()
-        l.loadJSON("level.json")
+        l.loadJSON("level1.json")
         //console.log(0)
        import {Event,Vector} from "./coretools.js"
-       Event.on("end",(obj)=>obj.entity.gravity.add(new Vector(-100,0)))
+       Event.on("endy",(obj)=>{Event.emit("End");l.loadJSON("level1.json")})
     </script>
 </body>
 </html>
