@@ -103,7 +103,7 @@ class Entity extends Sprite {
     onCollision(block) {
         let positionDiferenc = Vector.sub(Vector.add(block.position,Vector.div(block.hitbox.offset2,2)), Vector.add(this.position,Vector.div(this.hitbox.offset2,2)));
         //console.log("v"+positionDiferenc.x+" "+positionDiferenc.y);
-        if (Math.abs(positionDiferenc.x) > Math.abs(positionDiferenc.y)){
+        if (Math.floor(Math.abs(positionDiferenc.x)) > Math.floor(Math.abs(positionDiferenc.y))){
             if (positionDiferenc.x > 0) {
                 // Collision from the left
                 //console.log("Collision from the left");
