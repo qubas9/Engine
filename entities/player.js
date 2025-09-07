@@ -60,7 +60,9 @@ class Player extends Entity {
                 }
         })
     }
-    This.addAcceleration(new Vector(-This.onClickAcceleration, 0)); // Move left
+        if (Math.abs(This.velocity.x) < This.maxXSpeed){
+            This.addAcceleration(new Vector(-This.onClickAcceleration*This.inAirDrag, 0)); // Move left
+        }
     }
 
     /**
@@ -79,7 +81,7 @@ class Player extends Entity {
         })
     }
     if (Math.abs(This.velocity.x) < This.maxXSpeed){
-        This.addAcceleration(new Vector(This.onClickAcceleration, 0)); // Move right
+        This.addAcceleration(new Vector(This.onClickAcceleration*This.inAirDrag, 0)); // Move right
     }   
     }
 
@@ -99,7 +101,7 @@ class Player extends Entity {
      * @param {Player} This - The current Player instance.
      */
     down(This) {
-        This.addAcceleration(new Vector(0, This.onClickAcceleration)); // Move down
+        This.addAcceleration(new Vector(0, This.onClickAcceleration*This.inAirDrag)); // Move down
     }
     /**
      * Updates the player's state and controls based on the elapsed time.
