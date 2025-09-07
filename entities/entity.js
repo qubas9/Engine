@@ -51,8 +51,8 @@ class Entity extends Sprite {
             // Update ground sensors positions
             
         }else{
-            // this.velocity.x *= this.inAirDrag
             this.velocity.add(Vector.mult(this.gravity, deltaTime));
+            this.velocity.x *= this.inAirDrag
         }
         
         // Update the entity's position based on its velocity

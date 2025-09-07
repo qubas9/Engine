@@ -32,6 +32,7 @@ class Player extends Entity {
         this.onClickAcceleration = input.onClickAcceleration;
         this.dragCorectionAplied = false
         this.maxXSpeed = input.maxXSpeed
+        this.inAirAccelerationDrag = input.inAirAccelerationDrag
         this.maxBoost = input.maxBoost
         this.jumpAcceleration = input.jumpAcceleration; // Set the jump acceleration
         this.controls.bind("left", "a", this.left);
@@ -65,7 +66,7 @@ class Player extends Entity {
         if (This.onGround){
             accel = This.onClickAcceleration;
         }else{
-            accel = This.onClickAcceleration*This.inAirDrag;
+            accel = This.onClickAcceleration*This.inAirAccelerationDrag;
         }
         This.addAcceleration(new Vector(-accel, 0)); // Move right
         }else{
@@ -93,7 +94,7 @@ class Player extends Entity {
         if (This.onGround){
             accel = This.onClickAcceleration;
         }else{
-            accel = This.onClickAcceleration*This.inAirDrag;
+            accel = This.onClickAcceleration*This.inAirAccelerationDrag;
         }
         This.addAcceleration(new Vector(accel, 0)); // Move right
     }else{
