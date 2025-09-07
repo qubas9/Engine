@@ -16,7 +16,7 @@
           "x": 0,
           "y": 300
         },
-        "maxXSpeed": 640,
+        "maxXSpeed": 60,
         "maxBoost": 1200,
         "colisionOfsset": 1
       }

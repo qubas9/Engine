@@ -61,7 +61,7 @@ class Player extends Entity {
                 }
         })
     }
-        if (Math.abs(This.velocity.x) < This.maxXSpeed){
+        if (This.velocity.x > -This.maxXSpeed){
             let accel;
         if (This.onGround){
             accel = This.onClickAcceleration;
@@ -89,7 +89,7 @@ class Player extends Entity {
                 }
         })
     }
-    if (Math.abs(This.velocity.x) < This.maxXSpeed){
+    if (This.velocity.x < This.maxXSpeed){
         let accel;
         if (This.onGround){
             accel = This.onClickAcceleration;
