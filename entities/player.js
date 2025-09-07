@@ -61,7 +61,15 @@ class Player extends Entity {
         })
     }
         if (Math.abs(This.velocity.x) < This.maxXSpeed){
-            This.addAcceleration(new Vector(-This.onClickAcceleration*This.inAirDrag, 0)); // Move left
+            let accel;
+        if (This.onGround){
+            accel = This.onClickAcceleration;
+        }else{
+            accel = This.onClickAcceleration*This.inAirDrag;
+        }
+        This.addAcceleration(new Vector(-accel, 0)); // Move right
+        }else{
+            This.velocity.x = -This.maxXSpeed
         }
     }
 
@@ -81,8 +89,16 @@ class Player extends Entity {
         })
     }
     if (Math.abs(This.velocity.x) < This.maxXSpeed){
-        This.addAcceleration(new Vector(This.onClickAcceleration*This.inAirDrag, 0)); // Move right
-    }   
+        let accel;
+        if (This.onGround){
+            accel = This.onClickAcceleration;
+        }else{
+            accel = This.onClickAcceleration*This.inAirDrag;
+        }
+        This.addAcceleration(new Vector(accel, 0)); // Move right
+    }else{
+            This.velocity.x = This.maxXSpeed
+        }   
     }
 
     /**
