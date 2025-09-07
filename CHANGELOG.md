@@ -4,6 +4,9 @@ NOT All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### FIX
+-proper detecting of maxXspeed in both directions
+
 ## [2.2.0] - 2025-09-07
 
 ### ADD
