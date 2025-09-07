@@ -4,6 +4,12 @@ NOT All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### ADD
+-inAirAccelerationDrag
+
+### FIX
+-left maxXspeed now works properly
+
 ## [2.1.0] - 2025-09-07
 
 ### ADD
