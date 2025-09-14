@@ -4,6 +4,11 @@ NOT All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### ADD
+
+-Event MaxSpeedReached
+-Event Frame
+
 ## [2.2.2] - 2025-09-14
 
 ### FIX
