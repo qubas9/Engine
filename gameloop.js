@@ -1,4 +1,4 @@
-import { Event } from "../coretools.js";
+import { Event } from "./coretools.js";
 
 class GameLoop {
     constructor({physic, render, fps}) {

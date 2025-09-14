@@ -4,6 +4,9 @@ NOT All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### FIX
+-fixed dependencies
+
 ## [2.3.1] - 2025-09-14
 
 ### FIX
