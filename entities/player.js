@@ -1,5 +1,6 @@
 import { Control } from "../coretools.js";
 import { Vector } from "../coretools.js";
+import { Event } from "../coretools.js";
 import{ Entity } from "../engine.js";
 /**
  * Represents a player entity that can be controlled and interact with the game environment.
