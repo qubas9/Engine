@@ -4,6 +4,9 @@ NOT All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### FIX
+-level size is now corectly calculated
+
 ## [2.2.1] - 2025-09-07
 
 ### FIX

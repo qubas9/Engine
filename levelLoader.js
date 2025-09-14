@@ -15,6 +15,8 @@ class LevelLoader{
     }
 
     loadLevel(level){
+        this.xmax = 0
+        this.ymax = 0
         this.currentLevel = level.name || "unnamedLevel"
         let setings
         if(level.setings == "default" && this.defaulSetings){
