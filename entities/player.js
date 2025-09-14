@@ -70,6 +70,7 @@ class Player extends Entity {
         }
         This.addAcceleration(new Vector(-accel, 0)); // Move right
         }else{
+            Event.emit("MaxSpeedReached",This)
             This.velocity.x = -This.maxXSpeed
         }
     }
@@ -99,6 +100,7 @@ class Player extends Entity {
         This.addAcceleration(new Vector(accel, 0)); // Move right
     }else{
             This.velocity.x = This.maxXSpeed
+            Event.emit("MaxSpeedReached",This)
         }   
     }
 

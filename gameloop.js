@@ -41,6 +41,7 @@ class GameLoop {
             for (let fn of this.functions) {
                 fn(this.deltaTime);
             }
+            Event.emit("Frame",this.deltaTime)
             this.physic.update(this.deltaTime);
             this.render.render();
 
