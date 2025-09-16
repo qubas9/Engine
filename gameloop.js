@@ -89,6 +89,13 @@ class GameLoop {
             console.error("Provided argument is not a function.");
         }
     }
+
+    destroy() {
+        this.stop();
+        this.functions = [];
+        this.physic.destroy();
+        this.render.destroy();
+    }
 }
 
 export default GameLoop;

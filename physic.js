@@ -16,6 +16,7 @@ class Physic {
         this.entyties.forEach(entity => {
             entity.update(deltaTime);
             this.blocks.forEach(block => {
+                if (this.ended) return; // Exit if the game has ended
                 entity.checkColision(block);
             });
             entity.afterUpdate(deltaTime); // Call afterUpdate if it exists
@@ -45,6 +46,12 @@ class Physic {
         } else {
             console.error("Invalid entity object. It must have an update method.");
         }
+    }
+    destroy() {
+        this.ended = true; // Set the ended flag to true
+        this.blocks = [];
+        this.entyties = [];
+        this.updatable = [];
     }
 }
 

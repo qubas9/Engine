@@ -11,7 +11,7 @@ class LevelLoader{
         this.ymax = 0
         this.levelList = levelList
         Event.on("NextLevel",this.nextLevel.bind(this))
-        Event.on("End",(() => {this.GameLoop.stop(); this.render.destroy();}).bind(this))
+        Event.on("End",(() => {this.GameLoop.destroy();}).bind(this))
     }
 
     loadLevel(level){

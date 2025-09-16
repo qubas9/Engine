@@ -4,6 +4,14 @@ NOT All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### ADD
+
+-destroy methods for physic and gameloop
+
+### FIX
+
+-physic now properly stops after End event is called do to the LevelLoader using the new destroy method
+
 ## [2.3.2] - 2025-09-14
 
 ### FIX
