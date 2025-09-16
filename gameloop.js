@@ -45,6 +45,7 @@ class GameLoop {
             }
             Event.emit("Frame",this.deltaTime)
             this.physic.update(this.deltaTime);
+            if (this.ended) return; // Exit if the game has ended
             this.render.render();
 
             // Test FPS přesnosti
@@ -91,6 +92,7 @@ class GameLoop {
     }
 
     destroy() {
+        this.ended = true;
         this.stop();
         this.functions = [];
         this.physic.destroy();

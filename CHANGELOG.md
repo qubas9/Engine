@@ -4,6 +4,10 @@ NOT All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### FIX
+
+-physic and GameLoop should now properly end it self when destroyed
+
 ## [2.4.0] - 2025-09-17
 
 ### ADD

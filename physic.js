@@ -9,20 +9,24 @@ class Physic {
     }
 
     update(deltaTime) {
-        this.updatable.forEach(updatable => {
+        for (const updatable of this.updatable) {
+            if (this.ended) return; // Exit if the game has ended
             updatable.update(deltaTime);
-        });
+        }
 
-        this.entyties.forEach(entity => {
+        for (const entity of this.entyties) {
             entity.update(deltaTime);
-            this.blocks.forEach(block => {
+            for (const block of this.blocks) {
                 if (this.ended) return; // Exit if the game has ended
                 entity.checkColision(block);
-            });
-            entity.afterUpdate(deltaTime); // Call afterUpdate if it exists
-        });
+            }
+            if (this.ended) return; // Exit if the game has ended
+            entity.afterUpdate(deltaTime);
+        }
+            
+        }
 
-    }
+    
 
     addBlock(block) {
         if (block instanceof Block) {
