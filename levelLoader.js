@@ -72,6 +72,7 @@ class LevelLoader{
             })
         }
         this.render.setCameraBoundres(this.xmax * setings.grid.size,(this.ymax+1) * setings.grid.size)
+        Event.emit("LevelLoading",level)
         this.waitToLoad(setings);
         }
 
