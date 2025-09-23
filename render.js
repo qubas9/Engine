@@ -138,7 +138,7 @@ class Render {
         }
 
         this.ctx.setTransform(1, 0, 0, 1, 0, 0);
-        Event.emit("RenderHUD")
+        Event.emit("RenderHUD",this.ctx,this.canvas)
   }
     destroy() {
         document.body.removeChild(this.canvas);

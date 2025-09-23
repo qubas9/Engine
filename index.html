@@ -15,6 +15,33 @@
         //console.log(0)
        import {Event,Vector} from "./coretools.js"
        Event.on("endy",(obj)=>{Event.emit("NextLevel")})
+       Event.on("RenderHUD",(ctx)=>{
+        // ctx.save();
+        // ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset transformations
+
+        // Example: Draw a simple health bar
+        const health = 75; // Example health value
+        const maxHealth = 100;
+        const barWidth = 200;
+        const barHeight = 20;
+        const x = 20; // X position of the health bar
+        const y = 20; // Y position of the health bar
+
+        // Draw background
+        ctx.fillStyle = 'grey';
+        ctx.fillRect(x, y, barWidth, barHeight);
+
+        // Draw health
+        ctx.fillStyle = 'red';
+        ctx.fillRect(x, y, (health / maxHealth) * barWidth, barHeight);
+
+        // Draw border
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(x, y, barWidth, barHeight);
+
+        // ctx.restore();
+       })
        Event.on("NoMoreLevels",() => {Event.emit("End");l.loadJSON("level.json");})
     </script>
 </body>
