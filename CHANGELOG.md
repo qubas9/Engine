@@ -4,6 +4,8 @@ NOT All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [2.5.0] - 2025-09-23
+
 ### ADD
 
 - RenderHUD event
