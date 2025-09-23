@@ -1,4 +1,4 @@
-import { Vector } from "./coretools.js";
+import { Vector, Event } from "./coretools.js";
 import {Sprite} from "./engine.js"; // Ensure Sprite is imported
 
 /**
@@ -136,6 +136,9 @@ class Render {
         if (typeof callback === "function") {
             callback();
         }
+
+        this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+        Event.emit("RenderHUD")
   }
     destroy() {
         document.body.removeChild(this.canvas);
