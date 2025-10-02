@@ -44,6 +44,21 @@ class Entity extends Sprite {
     }
 
     update(deltaTime) {
+        if (this.velocity.x < this.velocity.y){
+            this.resolveYlist.forEach((block) => {
+                this.resolveY(block)
+            })
+            this.resolveXlist.forEach((block) => {
+                this.resolveX(block)
+            })
+        }else{
+            this.resolveXlist.forEach((block) => {
+                this.resolveX(block)
+            })
+            this.resolveYlist.forEach((block) => {
+                this.resolveY(block)
+            })
+        }
         // Apply gravity to the entity's velocity
         this.touching = []; // Reset touching array if on ground
         if (this.onGround) {
@@ -78,21 +93,7 @@ class Entity extends Sprite {
     }
 
     afterUpdate(deltaTime) {
-        if (this.velocity.x < this.velocity.y){
-            this.resolveYlist.forEach((block) => {
-                this.resolveY(block)
-            })
-            this.resolveXlist.forEach((block) => {
-                this.resolveX(block)
-            })
-        }else{
-            this.resolveXlist.forEach((block) => {
-                this.resolveX(block)
-            })
-            this.resolveYlist.forEach((block) => {
-                this.resolveY(block)
-            })
-        }
+        
     }
 
     addVelocity(velocity) {
