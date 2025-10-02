@@ -4,6 +4,8 @@ NOT All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [3.0.2] - 2025-10-03
+
 ### FIX
 -player shuldn't no longer unexpectadly stop
 
