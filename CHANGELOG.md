@@ -4,6 +4,9 @@ NOT All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### FIX
+-player shuldn't no longer unexpectadly stop
+
 ## [3.0.0] - 2025-10-03
 
 ### FIX

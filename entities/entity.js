@@ -70,6 +70,7 @@ class Entity extends Sprite {
         this.hitbox.updatePosition(this.position);
         this.groundSensor.updatePosition(this.position); // Update the ground sensor position
         
+        this.latesAxes = ""; // Reset latest axis of collision
         this.passableOnGround = []; // Reset onGround flag at the start of each update
        this.acceleration = new Vector(0, 0); // Reset acceleration after applying it
     }
@@ -101,9 +102,13 @@ class Entity extends Sprite {
     }
 
     onCollision(block) {
+    console.log("Collision with block detected",this.latesAxes);
+    
         let positionDifference = Vector.sub(Vector.add(block.position,Vector.div(block.hitbox.offset2,2)), Vector.add(this.position,Vector.div(this.hitbox.offset2,2)));
         //console.log("v"+positionDifference.x+" "+positionDifference.y);
-        if (Math.floor(Math.abs(positionDifference.x)) > Math.floor(Math.abs(positionDifference.y))){
+        if (Math.floor(Math.abs(positionDifference.x)) > Math.floor(Math.abs(positionDifference.y)) && this.latesAxes != "y"){
+            this.latesAxes = "x"
+            console.log("Latest axis set to x");
             if (positionDifference.x > 0) {
                 // Collision from the left
                 //console.log("Collision from the left");
@@ -115,8 +120,9 @@ class Entity extends Sprite {
                 this.position.x = block.hitbox.position.x + block.hitbox.offset2.x+this.collisionOffset;
                 block.onCollision(this, new Vector(-1,0)); // Notify the block of the collision
             }
-        }else {
-            
+        }else if(this.latesAxes != "x"){
+            this.latesAxes = "y"
+            console.log("Latest axis set to y");
             if (positionDifference.y > 0) {
                 // Collision from above
                 //console.log("Collision from above");
