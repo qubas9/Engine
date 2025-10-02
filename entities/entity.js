@@ -41,24 +41,13 @@ class Entity extends Sprite {
         this.touching = [];
         this.passableOnGround = []; // Flag to indicate if the entity is passable on ground
         config.physic.addEntity(this); // Assuming physic is an instance of a class that manages entities
+        this.resolveXlist = []
+        this.resolveYlist = []
+        this.collisionHapened = false
     }
 
     update(deltaTime) {
-        if (this.velocity.x < this.velocity.y){
-            this.resolveYlist.forEach((block) => {
-                this.resolveY(block)
-            })
-            this.resolveXlist.forEach((block) => {
-                this.resolveX(block)
-            })
-        }else{
-            this.resolveXlist.forEach((block) => {
-                this.resolveX(block)
-            })
-            this.resolveYlist.forEach((block) => {
-                this.resolveY(block)
-            })
-        }
+        
         // Apply gravity to the entity's velocity
         this.touching = []; // Reset touching array if on ground
         if (this.onGround) {
@@ -90,10 +79,34 @@ class Entity extends Sprite {
        this.acceleration = new Vector(0, 0); // Reset acceleration after applying it
        this.resolveXlist = []
        this.resolveYlist = []
+         this.collisionHapened = false
     }
 
     afterUpdate(deltaTime) {
-        
+        if (this.collisionHapened){
+            let max = 0
+            let maId = 0
+            let type = ""
+            this.resolveXlist.forEach((block,i) => {
+                if (block[1].mag > max){
+                    max = block[1].mag
+                    maId = i
+                    type = "x"
+                }
+            })
+            this.resolveYlist.forEach((block,i) => {
+                if (block[1].mag > max){
+                    max = block[1].mag
+                    maId = i
+                    type = "y"
+                }
+            })
+            if (type == "x"){
+                this.resolveX(this.resolveXlist[maId])
+            }else if(type == "y"){
+                this.resolveY(this.resolveYlist[maId])
+            }
+        }
     }
 
     addVelocity(velocity) {
@@ -119,6 +132,7 @@ class Entity extends Sprite {
     }
 
     onCollision(block) {
+        this.collisionHapened = true
     // console.log("Collision with block detected",this.latesAxes);
     
         let positionDifference = Vector.sub(Vector.add(block.position,Vector.div(block.hitbox.offset2,2)), Vector.add(this.position,Vector.div(this.hitbox.offset2,2)));
