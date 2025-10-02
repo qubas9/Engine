@@ -4,6 +4,30 @@ NOT All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### FIX
+
+-fix bug where after presing jum jump would hapend for two frames insted of one this reduce the jump hight so you need to retune the jump hight
+
+- Fixed various spelling mistakes throughout the codebase for better maintainability:
+  - Changed "setings" to "settings" everywhere in JavaScript files and JSON config files
+  - Changed "defaulSetings" to "defaultSettings" in LevelLoader
+  - Changed "elemetsLoaded" to "elementsLoaded" in LevelLoader
+  - Changed "DefaultSetingsJSONLoaded" to "DefaultSettingsJSONLoaded" in events
+  - Changed "colisionOfsset" to "collisionOffset" in Entity class and level configurations
+  - Changed "colision" to "collision" in method names and events
+  - Changed "positionDiferenc" to "positionDifference" in Entity class
+  - Changed "pasibleOnGround" to "passableOnGround" in Entity class
+  - Changed "defaultOnColisionEvent" to "defaultOnCollisionEvent" in event blocks
+
+### ADD
+
+- Event LevelJSONLoaded
+- Event DefaultSettingsJSONLoaded
+- Event CurrentLevelNotFound
+- Event CurrentLevelNotSet
+- Event LevelListMissing
+-Documentation.md
+
 ## [2.6.0] - 2025-09-23
 
 ### ADD

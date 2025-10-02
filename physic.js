@@ -18,7 +18,7 @@ class Physic {
             entity.update(deltaTime);
             for (const block of this.blocks) {
                 if (this.ended) return; // Exit if the game has ended
-                entity.checkColision(block);
+                entity.checkCollision(block);
             }
             if (this.ended) return; // Exit if the game has ended
             entity.afterUpdate(deltaTime);
