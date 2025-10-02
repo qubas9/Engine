@@ -4,6 +4,8 @@ NOT All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [3.0.0] - 2025-10-03
+
 ### FIX
 
 -fix bug where after presing jum jump would hapend for two frames insted of one this reduce the jump hight so you need to retune the jump hight
