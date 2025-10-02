@@ -135,6 +135,7 @@ class Player extends Entity {
     }
     
     afterUpdate(deltaTime){
+        super.afterUpdate(deltaTime);
         this.controls.update(deltaTime);
     }
 }

@@ -70,13 +70,29 @@ class Entity extends Sprite {
         this.hitbox.updatePosition(this.position);
         this.groundSensor.updatePosition(this.position); // Update the ground sensor position
         
-        this.latesAxes = ""; // Reset latest axis of collision
+         // Reset latest axis of collision
         this.passableOnGround = []; // Reset onGround flag at the start of each update
        this.acceleration = new Vector(0, 0); // Reset acceleration after applying it
+       this.resolveXlist = []
+       this.resolveYlist = []
     }
 
     afterUpdate(deltaTime) {
-        
+        if (this.velocity.x < this.velocity.y){
+            this.resolveYlist.forEach((block) => {
+                this.resolveY(block)
+            })
+            this.resolveXlist.forEach((block) => {
+                this.resolveX(block)
+            })
+        }else{
+            this.resolveXlist.forEach((block) => {
+                this.resolveX(block)
+            })
+            this.resolveYlist.forEach((block) => {
+                this.resolveY(block)
+            })
+        }
     }
 
     addVelocity(velocity) {
@@ -102,13 +118,20 @@ class Entity extends Sprite {
     }
 
     onCollision(block) {
-    console.log("Collision with block detected",this.latesAxes);
+    // console.log("Collision with block detected",this.latesAxes);
     
         let positionDifference = Vector.sub(Vector.add(block.position,Vector.div(block.hitbox.offset2,2)), Vector.add(this.position,Vector.div(this.hitbox.offset2,2)));
         //console.log("v"+positionDifference.x+" "+positionDifference.y);
-        if (Math.floor(Math.abs(positionDifference.x)) > Math.floor(Math.abs(positionDifference.y)) && this.latesAxes != "y"){
-            this.latesAxes = "x"
-            console.log("Latest axis set to x");
+        if (Math.floor(Math.abs(positionDifference.x)) > Math.floor(Math.abs(positionDifference.y))){
+            
+            this.resolveXlist.push([block,positionDifference])
+        }else{
+            this.resolveYlist.push([block,positionDifference])
+        }
+    }
+
+    resolveX([block,positionDifference]){
+        //console.log("Latest axis set to x");
             if (positionDifference.x > 0) {
                 // Collision from the left
                 //console.log("Collision from the left");
@@ -120,9 +143,10 @@ class Entity extends Sprite {
                 this.position.x = block.hitbox.position.x + block.hitbox.offset2.x+this.collisionOffset;
                 block.onCollision(this, new Vector(-1,0)); // Notify the block of the collision
             }
-        }else if(this.latesAxes != "x"){
-            this.latesAxes = "y"
-            console.log("Latest axis set to y");
+    }
+
+    resolveY([block,positionDifference]){
+        //console.log("Latest axis set to y");
             if (positionDifference.y > 0) {
                 // Collision from above
                 //console.log("Collision from above");
@@ -142,19 +166,17 @@ class Entity extends Sprite {
                 }
                 this.velocity.y = velocityY;
             }
-        }
     }
 
     checkSensor(block){
-                
-                if (this.groundSensor.isColliding(block.hitbox)){
-                    this.touching.push(block);
-                    block.touching(this);
-                    return true; // At least one sensor is colliding
-                }else{
-                    return false; // No collision with this sensor
-                }
+        if (this.groundSensor.isColliding(block.hitbox)){
+            this.touching.push(block);
+            block.touching(this);
+            return true; // At least one sensor is colliding
+        } else {
+            return false; // No collision with this sensor
         }
+    }
 }
 
 export default Entity; // Ensure Entity is exported as default
