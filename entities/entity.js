@@ -89,14 +89,14 @@ class Entity extends Sprite {
             let type = ""
             this.resolveXlist.forEach((block,i) => {
                 if (block[1].mag > max){
-                    max = block[1].mag
+                    max = Math.abs(Math.abs(block[1].x)-Math.abs(block[1].y))
                     maId = i
                     type = "x"
                 }
             })
             this.resolveYlist.forEach((block,i) => {
                 if (block[1].mag > max){
-                    max = block[1].mag
+                    max = Math.abs(Math.abs(block[1].x)-Math.abs(block[1].y))
                     maId = i
                     type = "y"
                 }
