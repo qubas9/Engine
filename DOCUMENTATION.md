@@ -34,6 +34,13 @@ export {
 };
 ```
 
+The engine uses ES6 modules with named exports from `coretools.js` for some helper libraries:
+```javascript
+export {
+  Event, Vector, Hitbox, Control
+};
+```
+
 ## Core Components
 
 ### 1. Game Loop (`GameLoop`)
