@@ -77,8 +77,6 @@ The central component that manages the game's update and render cycle.
 
 #### Events
 - `Frame(deltaTime: number)` - Emitted each frame with time elapsed
-- Timing is managed using `performance.now()` for precision
-- Uses `setTimeout` for frame timing with half frame duration offset
 
 ### 2. Rendering System (`Render`)
 Handles all visual aspects of the game using HTML5 Canvas.
